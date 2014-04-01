@@ -1,7 +1,7 @@
-package view.erythrocyte {
+package ru.norobots.trox.view.erythrocyte {
 import flash.display.DisplayObject;
 
-import view.ViewBase;
+import ru.norobots.trox.view.ViewBase;
 
 public class Erythrocyte extends ViewBase {
 

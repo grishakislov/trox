@@ -1,4 +1,4 @@
-package {
+package ru.norobots.trox {
 public class Assert {
 
     public static function notNull(value:Object) {

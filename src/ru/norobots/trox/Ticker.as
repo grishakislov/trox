@@ -1,4 +1,4 @@
-package {
+package ru.norobots.trox {
 import flash.display.Stage;
 import flash.events.Event;
 import flash.utils.Dictionary;

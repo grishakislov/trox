@@ -1,12 +1,14 @@
-package view {
+package ru.norobots.trox.view {
 import flash.display.Loader;
 import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.utils.ByteArray;
 
-import view.controls.Blister;
-import view.controls.Tube;
+import ru.norobots.trox.Resources;
+
+import ru.norobots.trox.view.controls.Blister;
+import ru.norobots.trox.view.controls.Tube;
 
 public class ApplicationView extends Sprite {
 

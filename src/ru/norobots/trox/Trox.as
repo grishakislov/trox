@@ -1,9 +1,9 @@
-package {
+package ru.norobots.trox {
 
 import flash.display.Sprite;
 import flash.text.TextField;
 
-import view.ApplicationView;
+import ru.norobots.trox.view.ApplicationView;
 
 [SWF(width="800", height="600", frameRate="50", backgroundColor="0xAAAAAA")]
 public class Trox extends Sprite {

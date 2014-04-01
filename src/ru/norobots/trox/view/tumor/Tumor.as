@@ -1,7 +1,7 @@
-package view.tumor {
+package ru.norobots.trox.view.tumor {
 import flash.display.DisplayObject;
 
-import view.controls.InteractiveView;
+import ru.norobots.trox.view.controls.InteractiveView;
 
 public class Tumor extends InteractiveView {
 

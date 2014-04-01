@@ -1,5 +1,7 @@
-package view.erythrocyte {
+package ru.norobots.trox.view.erythrocyte {
 import flash.display.DisplayObject;
+
+import ru.norobots.trox.Assert;
 
 public class ErythrocyteLayer {
 

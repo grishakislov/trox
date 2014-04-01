@@ -1,9 +1,9 @@
-package view {
+package ru.norobots.trox.view {
 import flash.display.DisplayObject;
 
-import view.erythrocyte.ErythrocyteLayer;
-import view.tumor.TumorLayer;
-import view.valve.ValveLayer;
+import ru.norobots.trox.view.erythrocyte.ErythrocyteLayer;
+import ru.norobots.trox.view.tumor.TumorLayer;
+import ru.norobots.trox.view.valve.ValveLayer;
 
 public class Vein extends ViewBase {
 

@@ -1,4 +1,4 @@
-package view.controls {
+package ru.norobots.trox.view.controls {
 import flash.display.DisplayObject;
 
 public class Tube extends InteractiveView {

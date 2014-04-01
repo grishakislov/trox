@@ -1,4 +1,4 @@
-package view {
+package ru.norobots.trox.view {
 public class AnimationType {
 
     public static const LOOPED:AnimationType = new AnimationType("looped");

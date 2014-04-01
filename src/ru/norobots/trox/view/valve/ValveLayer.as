@@ -1,5 +1,7 @@
-package view.valve {
+package ru.norobots.trox.view.valve {
 import flash.display.DisplayObject;
+
+import ru.norobots.trox.Assert;
 
 public class ValveLayer {
 

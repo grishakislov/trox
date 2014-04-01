@@ -1,7 +1,7 @@
-package view.valve {
+package ru.norobots.trox.view.valve {
 import flash.display.DisplayObject;
 
-import view.ViewBase;
+import ru.norobots.trox.view.ViewBase;
 
 public class Valve extends ViewBase {
 

@@ -1,6 +1,8 @@
-package view {
+package ru.norobots.trox.view {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
+
+import ru.norobots.trox.Ticker;
 
 public class ViewBase {
 

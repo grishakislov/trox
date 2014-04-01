@@ -1,7 +1,7 @@
-package view.controls {
+package ru.norobots.trox.view.controls {
 import flash.display.DisplayObject;
 
-import view.ViewBase;
+import ru.norobots.trox.view.ViewBase;
 
 public class InteractiveView extends ViewBase {
 

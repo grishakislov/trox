@@ -1,5 +1,7 @@
-package view.tumor {
+package ru.norobots.trox.view.tumor {
 import flash.display.DisplayObject;
+
+import ru.norobots.trox.Assert;
 
 public class TumorLayer {
 
