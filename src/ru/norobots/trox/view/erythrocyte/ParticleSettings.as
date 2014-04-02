@@ -1,5 +1,5 @@
 package ru.norobots.trox.view.erythrocyte {
-public class ParticleSettinga {
+public class ParticleSettings {
 
     public var speed:uint;
 
