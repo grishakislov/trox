@@ -1,15 +1,19 @@
 package ru.norobots.trox.view {
 import flash.display.DisplayObject;
 
+import ru.norobots.trox.animation.BaseAnimation;
+import ru.norobots.trox.animation.VeinExpandAnimation;
 import ru.norobots.trox.view.erythrocyte.ErythrocyteLayer;
 import ru.norobots.trox.view.tumor.TumorLayer;
 import ru.norobots.trox.view.valve.ValveLayer;
 
-public class Vein extends ViewBase {
+public class Vein extends BaseView {
 
     private var particles:ErythrocyteLayer;
     private var valveLayer:ValveLayer;
     private var tumorLayer:TumorLayer;
+
+    private var currentAnimation:BaseAnimation;
 
     public function Vein(visual:DisplayObject) {
         super(visual);
@@ -20,6 +24,21 @@ public class Vein extends ViewBase {
         initializeValveLayer();
         initializeTumorLayer();
         particles = new ErythrocyteLayer(visual.getChildByName("particles"));
+    }
+
+    public function expand():BaseAnimation {
+        var anim:BaseAnimation = new VeinExpandAnimation();
+        anim.addCompleteCallback(onCurrentAnimationCompleted);
+        play(anim);
+        return anim;
+    }
+
+    public function shrink():void {
+
+    }
+
+    private function onCurrentAnimationCompleted():void {
+
     }
 
     private function initializeValveLayer():void {
@@ -33,11 +52,24 @@ public class Vein extends ViewBase {
     private function initializeTumorLayer():void {
         tumorLayer = new TumorLayer();
         const NUM_TUMORS:uint = 6;
+        var tumor:DisplayObject;
         for (var i:int = 1; i <= NUM_TUMORS; i++) {
-            tumorLayer.addTumor(visual.getChildByName("tumor" + i));
+            tumor = visual.getChildByName("tumor" + i);
+            tumorLayer.addTumor(tumor);
         }
     }
 
+    public function getParticles():ErythrocyteLayer {
+        return particles;
+    }
 
+
+    public function getValveLayer():ValveLayer {
+        return valveLayer;
+    }
+
+    public function getTumorLayer():TumorLayer {
+        return tumorLayer;
+    }
 }
 }

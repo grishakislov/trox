@@ -6,7 +6,6 @@ import flash.events.Event;
 import flash.utils.ByteArray;
 
 import ru.norobots.trox.Resources;
-
 import ru.norobots.trox.view.controls.Blister;
 import ru.norobots.trox.view.controls.Tube;
 
@@ -19,10 +18,10 @@ public class ApplicationView extends Sprite {
     private var tube:Tube;
     private var loader:Loader;
 
-    public function ApplicationView() {
-        var veinMC:ByteArray = new Resources.TROX();
+    public function initialize():void {
         loader = new Loader();
-        loader.contentLoaderInfo.addEventListener(Event.INIT, loadCompleteListener, false, 0, true);
+        var veinMC:ByteArray = new Resources.TROX();
+        loader.contentLoaderInfo.addEventListener(Event.INIT, loadCompleteListener);
         loader.loadBytes(veinMC);
     }
 
@@ -33,7 +32,24 @@ public class ApplicationView extends Sprite {
         blister = new Blister(main.getChildByName("blister"));
         tube = new Tube(main.getChildByName("tube"));
         addChild(mc);
+
         trace("Assets initialized successfully")
+        dispatchEvent(new Event(Event.INIT));
+    }
+
+    public function getViewModel():PlainViewModel {
+        var result:PlainViewModel = new PlainViewModel();
+        result.vein = vein;
+        result.particles = vein.getParticles();
+        result.valves = vein.getValveLayer();
+        result.tumor = vein.getTumorLayer();
+        result.blister = blister;
+        result.tube = tube;
+        return result;
+    }
+
+    public function getLoader():Loader {
+        return loader;
     }
 }
 }
