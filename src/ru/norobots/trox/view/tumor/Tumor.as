@@ -1,10 +1,8 @@
 package ru.norobots.trox.view.tumor {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
-import flash.events.MouseEvent;
 
 import ru.norobots.trox.Ticker;
-
 import ru.norobots.trox.view.TutorialArrow;
 import ru.norobots.trox.view.controls.InteractiveState;
 import ru.norobots.trox.view.controls.InteractiveView;
@@ -17,6 +15,8 @@ public class Tumor extends InteractiveView {
 
     private var currentStep:uint;
     private var framesPassed:uint;
+
+    private var locked:Boolean;
 
     public function Tumor(tumor:DisplayObject) {
         var tumorMC:MovieClip = MovieClip(tumor);
@@ -47,12 +47,21 @@ public class Tumor extends InteractiveView {
     }
 
     private function onTick(dt:uint):void {
+
         framesPassed++;
         tumorMore();
+
+        if (locked) {
+            return;
+        }
 
         if (state == InteractiveState.ACTIVE) {
             cure();
         }
+    }
+
+    public function lock():void {
+        locked = true;
     }
 
     private function cure():void {
@@ -76,7 +85,7 @@ public class Tumor extends InteractiveView {
     }
 
     private function getBottomFrame():uint {
-        return currentStep * 3;
+        return currentStep * 4;
     }
 
     private function getFramesToSkip():uint {

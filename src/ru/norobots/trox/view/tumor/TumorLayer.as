@@ -80,5 +80,11 @@ public class TumorLayer {
     public function getLayer():DisplayObject {
         return layer;
     }
+
+    public function lock():void {
+        for (var i:int = 0; i < tumors.length; i++) {
+            tumors[i].lock();
+        }
+    }
 }
 }

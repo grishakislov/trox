@@ -23,6 +23,9 @@ public class BaseView {
         if (animation == null) {
             this.animation = new TranslationAnimation();
         } else {
+            if (this.animation != null) {
+                this.animation.clear();
+            }
             this.animation = animation;
         }
         this.animation.addMovie(visual);
@@ -30,7 +33,7 @@ public class BaseView {
     }
 
     public function stop():void {
-        animation.stop();
+        animation.clear();
     }
 
     public function reset():void {

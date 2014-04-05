@@ -31,5 +31,11 @@ public class ValveLayer {
     public function getLayer():DisplayObject {
         return layer;
     }
+
+    public function speedDown():void {
+        for (var i:int = 0; i < valves.length; i++) {
+            valves[i].speedDown();
+        }
+    }
 }
 }

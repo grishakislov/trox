@@ -26,6 +26,11 @@ public class BaseAnimation {
         Ticker.removeTickListener(onTick);
     }
 
+    public function clear():void {
+        movies = new Vector.<MovieClip>();
+        Ticker.removeTickListener(onTick);
+    }
+
     public function resume():void {
         Ticker.addTickListener(onTick);
     }

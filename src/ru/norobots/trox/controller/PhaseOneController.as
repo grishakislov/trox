@@ -56,6 +56,7 @@ public class PhaseOneController {
     }
 
     private function onComplete():void {
+        Ticker.removeTickListener(onTick);
         if (completeCallback != null) {
             completeCallback();
         }

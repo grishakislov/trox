@@ -8,11 +8,11 @@ public class GameController extends AbstractController {
 
         var phase1:PhaseOneController = new PhaseOneController(view);
         phase1.addCompleteCallback(onPhaseOneComplete);
-
     }
 
     private function onPhaseOneComplete():void {
-
+        var phase2:PhaseTwoController = new PhaseTwoController(view);
+        phase2.addCompleteCallback(onPhaseOneComplete);
     }
 }
 }
