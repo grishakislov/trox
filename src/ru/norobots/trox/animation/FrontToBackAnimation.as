@@ -1,8 +1,9 @@
 package ru.norobots.trox.animation {
 import flash.display.MovieClip;
 
+public class FrontToBackAnimation extends BaseAnimation {
 
-public class LoopAnimation extends BaseAnimation {
+    private static const MAX_FRAMES_SKIP:uint = 10;
 
     override protected function onTick(dt:uint):void {
         super.onTick(dt);
