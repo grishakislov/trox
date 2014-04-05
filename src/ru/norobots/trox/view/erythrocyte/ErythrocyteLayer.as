@@ -101,7 +101,7 @@ public class ErythrocyteLayer {
             particles[i].setVisible(true);
             delayMillis = Math.random() * 800 + 200;
             particles[i].playDelayed(counter * delayMillis); //TODO:
-            particles[i].playParticleLooped();
+//            particles[i].playParticleLooped();
             counter++;
         }
     }

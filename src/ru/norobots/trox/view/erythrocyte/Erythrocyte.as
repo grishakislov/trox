@@ -1,6 +1,7 @@
 package ru.norobots.trox.view.erythrocyte {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
+import flash.events.MouseEvent;
 import flash.events.TimerEvent;
 import flash.utils.Timer;
 
@@ -13,16 +14,12 @@ public class Erythrocyte extends BaseView {
 
     public function Erythrocyte(visual:DisplayObject, settings:ParticleSettings) {
         super(visual);
-//        var anim:LoopAnimation = new LoopAnimation();
-//        anim.addMovie(particleAnimation);
-//        particleAnimation.playWithAnimation(anim);
-
+        var particleAnimation:MovieClip = getVisual().getChildByName("particle_anim") as MovieClip;
+        var anim:LoopAnimation = new LoopAnimation();
+        anim.addMovie(particleAnimation);
+        anim.run();
         this.settings = settings;
-    }
-
-    public function playParticleLooped():void {
-        var particleAnimation:BaseView = new BaseView(getVisual().getChildByName("particle_anim"));
-        particleAnimation.play(new LoopAnimation());
+        getVisual().alpha = 0.5;
     }
 
     public function randomizePosition():void {
