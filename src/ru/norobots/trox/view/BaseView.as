@@ -1,6 +1,7 @@
 package ru.norobots.trox.view {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
+import flash.display.MovieClip;
 
 import ru.norobots.trox.Assert;
 
@@ -9,12 +10,11 @@ import ru.norobots.trox.animation.TranslationAnimation;
 
 public class BaseView {
 
-    protected var visual:MovieClip;
+    private var visual:MovieClip;
     protected var animation:BaseAnimation;
 
     public function BaseView(visual:DisplayObject) {
         Assert.notNull(visual);
-        visual.cacheAsBitmap = true;
         this.visual = MovieClip(visual);
         this.visual.gotoAndStop(1);
     }
@@ -25,7 +25,8 @@ public class BaseView {
         } else {
             this.animation = animation;
         }
-        this.animation.start(visual);
+        this.animation.addMovie(visual);
+        this.animation.run();
     }
 
     public function stop():void {
@@ -40,5 +41,8 @@ public class BaseView {
         visual.visible = value;
     }
 
+    public function getVisual():MovieClip {
+        return visual;
+    }
 }
 }

@@ -14,20 +14,28 @@ public class VeinExpandAnimation extends BaseAnimation {
     private var phase1:Boolean = true;
     private var phase2:Boolean = false;
 
-    override public function start(movie:MovieClip):void {
-        super.start(movie);
+    override public function addMovie(movie:MovieClip):void {
+        super.addMovie(movie);
+        if (movies.length > 1) {
+            return;
+        }
         startFrame = movie.currentFrame;
         var animationFrames:uint = movie.totalFrames / GameSettings.VEIN_STEPS;
         endFrame = startFrame + animationFrames;
 
         phase2TargetFrame = Math.round(movie.totalFrames / 6) + movie.currentFrame;
         phase1TargetFrame = phase2TargetFrame + Math.round(movie.totalFrames / 6) / 2;
-        run();
     }
 
     override protected function onTick(dt:uint):void {
         super.onTick(dt);
-        movie.gotoAndStop(getCurrentFrame());
+        var currentFrame:uint = getCurrentFrame();
+        if (currentFrame > 80) {
+            currentFrame = 80
+        }
+        for (var i:int = 0; i < movies.length; i++) {
+            movies[i].gotoAndStop(currentFrame);
+        }
     }
 
     private const EASE:uint = 2;
@@ -36,7 +44,7 @@ public class VeinExpandAnimation extends BaseAnimation {
 
     override protected function getCurrentFrame():uint {
         var result:Number;
-
+        var movie:MovieClip = movies[0];
         if (phase1) {
             result = movie.currentFrame + phase1FrameIncrement;
             phase1FrameIncrement += phase1FrameIncrement * EASE;

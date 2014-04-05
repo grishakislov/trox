@@ -5,17 +5,15 @@ public class TranslationAnimation extends BaseAnimation {
 
     private var forward:Boolean = true;
 
-    override public function start(movie:MovieClip):void {
-        super.start(movie);
-        run();
-    }
-
     override protected function onTick(dt:uint):void {
         super.onTick(dt);
-        movie.gotoAndStop(getCurrentFrame());
+        for (var i:int = 0; i < movies.length; i++) {
+            movies[i].gotoAndStop(getCurrentFrame());
+        }
     }
 
     override protected function getCurrentFrame():uint {
+        var movie:MovieClip = movies[0];
         if (movie.currentFrame <= 1) {
             forward = true;
         }

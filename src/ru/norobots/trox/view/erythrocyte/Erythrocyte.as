@@ -1,12 +1,10 @@
 package ru.norobots.trox.view.erythrocyte {
 import flash.display.DisplayObject;
+import flash.display.MovieClip;
 import flash.events.TimerEvent;
 import flash.utils.Timer;
 
-import ru.norobots.trox.animation.BaseAnimation;
-
 import ru.norobots.trox.animation.LoopAnimation;
-
 import ru.norobots.trox.view.BaseView;
 
 public class Erythrocyte extends BaseView {
@@ -15,11 +13,20 @@ public class Erythrocyte extends BaseView {
 
     public function Erythrocyte(visual:DisplayObject, settings:ParticleSettings) {
         super(visual);
+//        var anim:LoopAnimation = new LoopAnimation();
+//        anim.addMovie(particleAnimation);
+//        particleAnimation.playWithAnimation(anim);
+
         this.settings = settings;
     }
 
+    public function playParticleLooped():void {
+        var particleAnimation:BaseView = new BaseView(getVisual().getChildByName("particle_anim"));
+        particleAnimation.play(new LoopAnimation());
+    }
+
     public function randomizePosition():void {
-        visual.gotoAndStop(Math.floor(Math.random() * visual.totalFrames));
+        getVisual().gotoAndStop(Math.floor(Math.random() * getVisual().totalFrames));
     }
 
     public function playDelayed(delayMillis:uint):void {
@@ -32,7 +39,9 @@ public class Erythrocyte extends BaseView {
     }
 
     private function onTimerComplete(event:TimerEvent):void {
-        play(new LoopAnimation());
+        var animation:LoopAnimation = new LoopAnimation();
+        animation.addMovie(getVisual());
+        play(animation);
     }
 }
 }

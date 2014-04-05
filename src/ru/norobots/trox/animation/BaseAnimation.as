@@ -8,17 +8,17 @@ public class BaseAnimation {
     protected var millis:uint;
     protected var millisElapsed:uint = 0;
     protected var completeCallback:Function;
-    protected var movie:MovieClip;
+    protected var movies:Vector.<MovieClip> = new Vector.<MovieClip>();
 
     public function addCompleteCallback(callback:Function):void {
         completeCallback = callback;
     }
 
-    public function start(movie:MovieClip):void {
-        this.movie = movie;
+    public function addMovie(movie:MovieClip):void {
+        movies.push(movie);
     }
 
-    protected function run():void {
+    public function run():void {
         Ticker.addTickListener(onTick);
     }
 

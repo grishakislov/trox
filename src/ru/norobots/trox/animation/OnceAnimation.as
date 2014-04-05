@@ -1,18 +1,16 @@
 package ru.norobots.trox.animation {
 import flash.display.MovieClip;
 
-
-public class LoopAnimation extends BaseAnimation {
-
-
-    override public function addMovie(movie:MovieClip):void {
-        super.addMovie(movie);
-    }
+public class OnceAnimation extends BaseAnimation {
 
     override protected function onTick(dt:uint):void {
         super.onTick(dt);
         for (var i:int = 0; i < movies.length; i++) {
             movies[i].gotoAndStop(getCurrentFrame());
+        }
+        if (movies[0].currentFrame == movies[0].totalFrames - 1) {
+            stop();
+            onComplete();
         }
     }
 
@@ -23,5 +21,8 @@ public class LoopAnimation extends BaseAnimation {
         }
         return movie.currentFrame + 1;
     }
+
+
+
 }
 }
