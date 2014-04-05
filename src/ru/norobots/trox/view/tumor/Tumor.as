@@ -30,7 +30,7 @@ public class Tumor extends InteractiveView {
 
     override public function setVisible(value:Boolean):void {
         tumor.visible = value;
-        arrow1.getVisual().visible = value;
+        arrow1.getVisual().visible = false; //TODO:
         arrow2.getVisual().visible = value;
     }
 
