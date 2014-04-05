@@ -24,13 +24,21 @@ public class PhaseOneController {
         millisElapsed += dt;
         millisFromLastExpand += dt;
 
-        if (millisFromLastExpand >= GameSettings.VEIN_STEP_SECONDS * 1000) {
+        if (currentStepTimeOut()) {
             expandNext();
             millisFromLastExpand = 0;
         }
 
         if (phaseCompleted()) {
             onComplete();
+        }
+    }
+
+    private function currentStepTimeOut():Boolean {
+        if (currentVeinStep == 0) {
+            return millisFromLastExpand >= (GameSettings.VEIN_STEP_SECONDS * 1000) / 4;
+        } else {
+            return millisFromLastExpand >= GameSettings.VEIN_STEP_SECONDS * 1000
         }
     }
 
