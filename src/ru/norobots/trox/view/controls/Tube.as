@@ -20,8 +20,8 @@ public class Tube extends InteractiveView {
     }
 
     override protected function onMouseDown(event:MouseEvent):void {
-        if (getVisual().hitTestPoint(getVisual().stage.mouseX, getVisual().stage.mouseY)) {
-            setCursorVisible(getVisual().visible);
+        if (mouseInside()) {
+            setCursorVisible(!gelCursor.visible);
         }
     }
 
@@ -44,13 +44,13 @@ public class Tube extends InteractiveView {
 
     private function moveCursorToMouse():void {
         if (gelCursor.visible) {
-            var global:Point = getVisual().localToGlobal(point);
-            gelCursor.x = getVisual().stage.mouseX - global.x;
-            gelCursor.y = getVisual().stage.mouseY - global.y;
+            var global:Point = mainVisual.localToGlobal(point);
+            gelCursor.x = mainVisual.stage.mouseX - global.x;
+            gelCursor.y = mainVisual.stage.mouseY - global.y;
         }
     }
 
-    override public function getVisual():MovieClip {
+    public function getAll():MovieClip {
         return mainVisual;
     }
 }

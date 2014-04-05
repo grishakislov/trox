@@ -47,7 +47,7 @@ public class InteractiveView extends BaseView {
         }
     }
 
-    private function mouseInside():Boolean {
+    protected function mouseInside():Boolean {
         var visual:MovieClip = getVisual();
         var rect:Rectangle = visual.getRect(visual.stage);
         return rect.contains(visual.stage.mouseX, visual.stage.mouseY);

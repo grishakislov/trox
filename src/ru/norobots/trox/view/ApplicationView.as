@@ -65,7 +65,7 @@ public class ApplicationView extends Sprite {
         addChild(vein.getTumorLayer().getLayer());
 
         addChild(blister.getVisual());
-        addChild(tube.getVisual());
+        addChild(tube.getAll());
     }
 
     public function getViewModel():PlainViewModel {
