@@ -3,6 +3,7 @@ import flash.display.DisplayObject;
 import flash.display.MovieClip;
 
 import ru.norobots.trox.Ticker;
+import ru.norobots.trox.UIState;
 import ru.norobots.trox.view.TutorialArrow;
 import ru.norobots.trox.view.controls.InteractiveState;
 import ru.norobots.trox.view.controls.InteractiveView;
@@ -51,7 +52,7 @@ public class Tumor extends InteractiveView {
         framesPassed++;
         tumorMore();
 
-        if (locked) {
+        if (locked || !UIState.tubeSelected) {
             return;
         }
 

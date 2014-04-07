@@ -6,6 +6,7 @@ import flash.geom.Point;
 import flash.ui.Mouse;
 
 import ru.norobots.trox.Ticker;
+import ru.norobots.trox.UIState;
 
 public class Tube extends InteractiveView {
 
@@ -27,6 +28,7 @@ public class Tube extends InteractiveView {
 
     private function setCursorVisible(value:Boolean):void {
         gelCursor.visible = value;
+        UIState.tubeSelected = value;
         if (value) {
             Mouse.hide();
             Ticker.addTickListener(onTick);
