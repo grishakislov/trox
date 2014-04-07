@@ -32,9 +32,9 @@ public class ValveLayer {
         return layer;
     }
 
-    public function speedDown():void {
+    public function setIll():void {
         for (var i:int = 0; i < valves.length; i++) {
-            valves[i].speedDown();
+            valves[i].setIllDelayed();
         }
     }
 }

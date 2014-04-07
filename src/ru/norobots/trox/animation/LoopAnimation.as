@@ -7,7 +7,9 @@ public class LoopAnimation extends BaseAnimation {
     override protected function onTick(dt:uint):void {
         super.onTick(dt);
         for (var i:int = 0; i < movies.length; i++) {
+//            trace("Pre:" + movies[0].currentFrame);
             movies[i].gotoAndStop(getCurrentFrame());
+//            trace("Post:" + movies[0].currentFrame);
         }
     }
 

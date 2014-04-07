@@ -10,7 +10,7 @@ import ru.norobots.trox.animation.TranslationAnimation;
 
 public class BaseView {
 
-    private var visual:MovieClip;
+    protected var visual:MovieClip;
     protected var animation:BaseAnimation;
 
     public function BaseView(visual:DisplayObject) {

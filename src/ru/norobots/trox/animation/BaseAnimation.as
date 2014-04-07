@@ -5,7 +5,6 @@ import ru.norobots.trox.Ticker;
 
 public class BaseAnimation {
 
-    protected var millis:uint;
     protected var millisElapsed:uint = 0;
     protected var completeCallback:Function;
     protected var movies:Vector.<MovieClip> = new Vector.<MovieClip>();
@@ -15,7 +14,9 @@ public class BaseAnimation {
     }
 
     public function addMovie(movie:MovieClip):void {
-        movies.push(movie);
+        if (movies.indexOf(movie) == -1) {
+            movies.push(movie);
+        }
     }
 
     public function run():void {

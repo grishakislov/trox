@@ -9,7 +9,7 @@ public class PhaseTwoController {
     public function PhaseTwoController(view:PlainViewModel) {
         this.view = view;
         view.tumor.lock();
-        view.valves.speedDown();
+        view.valves.setIll();
     }
 
     private function onComplete():void {
