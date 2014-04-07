@@ -41,7 +41,7 @@ public class ApplicationView extends Sprite {
     }
 
     private function createScene():void {
-        x = -267;
+        x = -271;
         y = -356;
         addChild(bg);
 
@@ -58,12 +58,17 @@ public class ApplicationView extends Sprite {
         vein.getParticles().getLayer().y = 845;
         vein.getParticles().getLayer().rotation = -21.6;
 
+        vein.getCureLayer().getLayer().x = 220;
+        vein.getCureLayer().getLayer().y = 845;
+        vein.getCureLayer().getLayer().rotation = -21.6;
+
         vein.getTumorLayer().getLayer().x = 665;
         vein.getTumorLayer().getLayer().y = 630;
 
         vein.getTumorLayer().getLayer().rotation = -21.6;
 
         addChild(vein.getParticles().getLayer());
+        addChild(vein.getCureLayer().getLayer());
         addChild(vein.getValveLayer().getLayer());
         addChild(vein.getTumorLayer().getLayer());
 
@@ -74,6 +79,7 @@ public class ApplicationView extends Sprite {
     public function getViewModel():PlainViewModel {
         var result:PlainViewModel = new PlainViewModel();
         result.vein = vein;
+        result.cure = vein.getCureLayer();
         result.particles = vein.getParticles();
         result.valves = vein.getValveLayer();
         result.tumor = vein.getTumorLayer();

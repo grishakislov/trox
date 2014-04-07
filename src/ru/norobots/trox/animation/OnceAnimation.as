@@ -1,6 +1,8 @@
 package ru.norobots.trox.animation {
 import flash.display.MovieClip;
 
+import ru.norobots.trox.Ticker;
+
 public class OnceAnimation extends BaseAnimation {
 
     override protected function onTick(dt:uint):void {
@@ -17,7 +19,9 @@ public class OnceAnimation extends BaseAnimation {
     override protected function getCurrentFrame():uint {
         var movie:MovieClip = movies[0];
         if (movie.currentFrame == movie.totalFrames) {
-            return 1;
+            Ticker.removeTickListener(onTick);
+            return movie.currentFrame;
+            onComplete();
         }
         return movie.currentFrame + 1;
     }

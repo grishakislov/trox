@@ -35,7 +35,7 @@ public class ErythrocyteLayer {
 //        }
     }
 
-    private function initializeChildren():void {
+    protected function initializeChildren():void {
         var current:Erythrocyte;
         var currentBundle:MovieClip;
         for (var i:int = 1; i <= GameSettings.VEIN_STEPS; i++) {
@@ -51,7 +51,7 @@ public class ErythrocyteLayer {
         }
     }
 
-    private function initializeAnimation():void {
+    protected function initializeAnimation():void {
         var numParticles = getParticlesNumByStep();
         var currentParticle:Erythrocyte;
         for (var i:int = 0; i <= numParticles; i++) {

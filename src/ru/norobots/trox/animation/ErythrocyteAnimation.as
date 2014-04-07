@@ -25,7 +25,7 @@ public class ErythrocyteAnimation extends BaseAnimation {
                 return movie.totalFrames;
             }
         } else {
-            if (movie.currentFrame == movie.totalFrames && !keepLoop) {
+            if (movie.currentFrame == movie.totalFrames) {
                 return 1;
             }
         }
@@ -61,6 +61,7 @@ public class ErythrocyteAnimation extends BaseAnimation {
     }
 
     public function moveFront():void {
+        trace("Front!");
         back = false;
     }
 
