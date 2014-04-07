@@ -13,10 +13,8 @@ public class Tumor extends InteractiveView {
     private var tumor:MovieClip;
     private var arrow1:TutorialArrow;
     private var arrow2:TutorialArrow;
-
     private var currentStep:uint;
     private var framesPassed:uint;
-
     private var locked:Boolean;
 
     public function Tumor(tumor:DisplayObject) {
@@ -47,6 +45,10 @@ public class Tumor extends InteractiveView {
         currentStep = value;
     }
 
+    public function lock():void {
+        locked = true;
+    }
+
     private function onTick(dt:uint):void {
 
         framesPassed++;
@@ -59,10 +61,6 @@ public class Tumor extends InteractiveView {
         if (state == InteractiveState.ACTIVE) {
             cure();
         }
-    }
-
-    public function lock():void {
-        locked = true;
     }
 
     private function cure():void {

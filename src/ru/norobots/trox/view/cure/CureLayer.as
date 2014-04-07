@@ -19,6 +19,15 @@ public class CureLayer {
         initializeAnimation();
     }
 
+    public function play():void {
+        for (var i:int = 0; i < particles.length; i++) {
+            particles[i].playDelayed();
+        }
+    }
+
+    public function getLayer():Sprite {
+        return layer;
+    }
 
     protected function initializeChildren():void {
         var current:Cure;
@@ -37,16 +46,6 @@ public class CureLayer {
             currentParticle.setVisible(true);
 
         }
-    }
-
-    public function play():void {
-        for (var i:int = 0; i < particles.length; i++) {
-            particles[i].playDelayed();
-        }
-    }
-
-    public function getLayer():Sprite {
-        return layer;
     }
 }
 }

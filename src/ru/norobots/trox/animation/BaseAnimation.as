@@ -36,14 +36,14 @@ public class BaseAnimation {
         Ticker.addTickListener(onTick);
     }
 
-    protected function onTick(dt:uint):void {
-        millisElapsed += dt;
-    }
-
     public function onComplete():void {
         if (completeCallback != null) {
             completeCallback();
         }
+    }
+
+    protected function onTick(dt:uint):void {
+        millisElapsed += dt;
     }
 
     protected function getCurrentFrame():uint {

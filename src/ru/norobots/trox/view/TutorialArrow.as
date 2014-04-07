@@ -17,14 +17,14 @@ public class TutorialArrow extends BaseView {
         play(anim);
     }
 
-    private function onOnceAnimCompleted():void {
-        getVisual().visible = false;
-    }
-
     public function playLooped():void {
         var anim:LoopAnimation = new LoopAnimation();
         anim.addMovie(getVisual());
         play(anim);
+    }
+
+    private function onOnceAnimCompleted():void {
+        getVisual().visible = false;
     }
 }
 }

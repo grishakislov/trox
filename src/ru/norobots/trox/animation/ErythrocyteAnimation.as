@@ -5,10 +5,8 @@ public class ErythrocyteAnimation extends BaseAnimation {
 
     private static const NORMAL_SKIP:uint = 8;
     private static const BACK_SKIP:int = -4;
-
     private var back:Boolean;
     private var keepLoop:Boolean;
-
     private var currentIncrement:Number = NORMAL_SKIP;
 
     override protected function onTick(dt:uint):void {
@@ -33,6 +31,15 @@ public class ErythrocyteAnimation extends BaseAnimation {
         return increment();
     }
 
+    public function moveBack():void {
+        back = true;
+    }
+
+    public function moveFront():void {
+        trace("Front!");
+        back = false;
+    }
+
     private function increment():uint {
         var movie:MovieClip = movies[0];
         if (back) {
@@ -54,15 +61,6 @@ public class ErythrocyteAnimation extends BaseAnimation {
             return movie.currentFrame + Math.round(currentIncrement);
         }
         return 0;
-    }
-
-    public function moveBack():void {
-        back = true;
-    }
-
-    public function moveFront():void {
-        trace("Front!");
-        back = false;
     }
 
 

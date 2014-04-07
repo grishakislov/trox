@@ -13,11 +13,8 @@ public class RasterizedMovieClip extends MovieClip {
 
     protected var visual:MovieClip;
     private var frames:Vector.<RasterizedFrame>;
-
     protected var animation:BaseAnimation;
-
     private var container:Bitmap;
-
     private var replaceChildren:Boolean;
 
     public function RasterizedMovieClip(visual:MovieClip, replaceChildren:Boolean = false) {

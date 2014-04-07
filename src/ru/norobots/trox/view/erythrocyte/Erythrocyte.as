@@ -19,13 +19,12 @@ public class Erythrocyte extends BaseView {
         getVisual().alpha = 0.5;
     }
 
-    public function randomizePosition():void {
-        getVisual().gotoAndStop(Math.floor(Math.random() * getVisual().totalFrames));
-    }
-
-
     override public function play(animation:BaseAnimation = null):void {
         super.play(animation);
+    }
+
+    public function randomizePosition():void {
+        getVisual().gotoAndStop(Math.floor(Math.random() * getVisual().totalFrames));
     }
 
     public function playDelayed(delayMillis:uint):void {
@@ -40,15 +39,6 @@ public class Erythrocyte extends BaseView {
             timer.addEventListener(TimerEvent.TIMER, onTimerComplete);
             timer.start();
         }
-    }
-
-    private function onTimerComplete(event:TimerEvent):void {
-//        if (animation != null) {
-//            animation.clear();
-//        }
-        var anim:ErythrocyteAnimation = new ErythrocyteAnimation();
-        anim.addMovie(getVisual());
-        play(anim);
     }
 
     public function moveFrontDelayed():void {
@@ -67,6 +57,19 @@ public class Erythrocyte extends BaseView {
         return Math.random() * 2000;
     }
 
+    private function getAnimation():ErythrocyteAnimation {
+        return ErythrocyteAnimation(animation);
+    }
+
+    private function onTimerComplete(event:TimerEvent):void {
+//        if (animation != null) {
+//            animation.clear();
+//        }
+        var anim:ErythrocyteAnimation = new ErythrocyteAnimation();
+        anim.addMovie(getVisual());
+        play(anim);
+    }
+
     private function onFrontTimerComplete(event:TimerEvent):void {
         getAnimation().moveFront();
     }
@@ -77,10 +80,6 @@ public class Erythrocyte extends BaseView {
         } else {
             !1;
         }
-    }
-
-    private function getAnimation():ErythrocyteAnimation {
-        return ErythrocyteAnimation(animation);
     }
 }
 }

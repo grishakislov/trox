@@ -8,15 +8,14 @@ import ru.norobots.trox.GameSettings;
 
 public class ErythrocyteLayer {
 
-    private var currentStep:uint = 1;
-    private var visual:MovieClip;
     private static const PARTICLES_IN_STEP:uint = 7;
     private static const TOTAL_PARTICLES:uint = GameSettings.VEIN_STEPS * PARTICLES_IN_STEP;
+    private var layer:Sprite;
+    private var currentStep:uint = 1;
+    private var visual:MovieClip;
     private var particles:Vector.<Erythrocyte> = new Vector.<Erythrocyte>();
-
-    var layer:Sprite;
-
     private var numVisibleParticles:uint = 0;
+
 
     public function ErythrocyteLayer(visual:DisplayObject) {
         Assert.notNull(visual);
@@ -33,6 +32,30 @@ public class ErythrocyteLayer {
 //            trace("========================");
 //            trace("");
 //        }
+    }
+
+    public function setStep(step:uint):void {
+        trace("Step " + step);
+        currentStep = step;
+        if (currentStep > 1) { //Because first step already initialized
+            addParticles(getFirstParticleIndex(), getLastParticleIndex());
+        }
+    }
+
+    public function moveBack():void {
+        for (var i:int = 0; i < particles.length; i++) {
+            particles[i].moveBackDelayed();
+        }
+    }
+
+    public function moveFront():void {
+        for (var i:int = 0; i < particles.length; i++) {
+            particles[i].moveFrontDelayed();
+        }
+    }
+
+    public function getLayer():DisplayObject {
+        return layer;
     }
 
     protected function initializeChildren():void {
@@ -83,42 +106,14 @@ public class ErythrocyteLayer {
         return particles.length / GameSettings.VEIN_STEPS * currentStep;
     }
 
-    public function setStep(step:uint):void {
-        trace("Step " + step);
-        currentStep = step;
-        if (currentStep > 1) { //Because first step already initialized
-            addParticles(getFirstParticleIndex(), getLastParticleIndex());
-        }
-    }
-
-    public function moveBack():void {
-        for (var i:int = 0; i < particles.length; i++) {
-            particles[i].moveBackDelayed();
-        }
-    }
-
-    public function moveFront():void {
-        for (var i:int = 0; i < particles.length; i++) {
-            particles[i].moveFrontDelayed();
-        }
-    }
-
     private function addParticles(firstParticleIndex:uint, lastParticleIndex:uint):void {
         trace("Step = " + currentStep + ", indexes = " + firstParticleIndex + " " + lastParticleIndex);
-//        var counter:uint = 1;
         var delayMillis:uint;
         for (var i:int = firstParticleIndex; i <= lastParticleIndex; i++) {
             particles[i].setVisible(true);
             delayMillis = Math.random() * (GameSettings.VEIN_STEP_SECONDS * 1000 / 2) + 500;
-//            particles[i].playDelayed(counter * delayMillis); //TODO:
-            particles[i].playDelayed(delayMillis); //TODO:
-//            particles[i].playParticleLooped();
-//            counter++;
+            particles[i].playDelayed(delayMillis);
         }
-    }
-
-    public function getLayer():DisplayObject {
-        return layer;
     }
 
 }

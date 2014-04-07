@@ -18,11 +18,10 @@ public class InteractiveView extends BaseView {
 
     }
 
-    private function onAddedToStage(event:Event):void {
-        getVisual().removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-        getVisual().stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-        getVisual().stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-        getVisual().stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+    protected function mouseInside():Boolean {
+        var visual:MovieClip = getVisual();
+        var rect:Rectangle = visual.getRect(visual.stage);
+        return rect.contains(visual.stage.mouseX, visual.stage.mouseY);
     }
 
     protected function onMouseDown(event:MouseEvent):void {
@@ -32,6 +31,13 @@ public class InteractiveView extends BaseView {
     protected function onMouseUp(event:MouseEvent):void {
         mouseDown = false;
         state = InteractiveState.IDLE;
+    }
+
+    private function onAddedToStage(event:Event):void {
+        getVisual().removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+        getVisual().stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+        getVisual().stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+        getVisual().stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
     }
 
     private function onMouseMove(event:MouseEvent):void {
@@ -44,12 +50,6 @@ public class InteractiveView extends BaseView {
         } else {
             state = InteractiveState.IDLE;
         }
-    }
-
-    protected function mouseInside():Boolean {
-        var visual:MovieClip = getVisual();
-        var rect:Rectangle = visual.getRect(visual.stage);
-        return rect.contains(visual.stage.mouseX, visual.stage.mouseY);
     }
 }
 }

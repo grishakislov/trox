@@ -10,6 +10,7 @@ import ru.norobots.trox.UIState;
 
 public class Tube extends InteractiveView {
 
+    var point:Point = new Point(0,0);
     private var gelCursor:DisplayObject;
     private var mainVisual:MovieClip;
 
@@ -20,10 +21,8 @@ public class Tube extends InteractiveView {
         gelCursor.visible = false;
     }
 
-    override protected function onMouseDown(event:MouseEvent):void {
-        if (mouseInside()) {
-            setCursorVisible(!gelCursor.visible);
-        }
+    public function getAll():MovieClip {
+        return mainVisual;
     }
 
     private function setCursorVisible(value:Boolean):void {
@@ -42,8 +41,6 @@ public class Tube extends InteractiveView {
         moveCursorToMouse();
     }
 
-    var point:Point = new Point(0,0);
-
     private function moveCursorToMouse():void {
         if (gelCursor.visible) {
             var global:Point = mainVisual.localToGlobal(point);
@@ -52,8 +49,10 @@ public class Tube extends InteractiveView {
         }
     }
 
-    public function getAll():MovieClip {
-        return mainVisual;
+    override protected function onMouseDown(event:MouseEvent):void {
+        if (mouseInside()) {
+            setCursorVisible(!gelCursor.visible);
+        }
     }
 }
 }

@@ -13,7 +13,6 @@ public class ApplicationView extends Sprite {
 
     private var main:MovieClip;
     private var bg:MovieClip;
-
     private var vein:Vein;
     private var blister:Blister;
     private var tube:Tube;
@@ -26,27 +25,25 @@ public class ApplicationView extends Sprite {
         loader.loadBytes(veinMC);
     }
 
-    private function loadCompleteListener(e:Event):void {
-        var mc:MovieClip = MovieClip(loader.content);
-        main = MovieClip(mc.getChildByName("main"));
-        bg = MovieClip(main.getChildByName("bg"));
-        vein = new Vein(main.getChildByName("vein_all"));
-        blister = new Blister(main.getChildByName("blister"));
-        tube = new Tube(main.getChildByName("tube"));
-
-        createScene();
-
-        trace("Assets initialized successfully")
-        dispatchEvent(new Event(Event.INIT));
+    public function getViewModel():PlainViewModel {
+        var result:PlainViewModel = new PlainViewModel();
+        result.vein = vein;
+        result.cure = vein.getCureLayer();
+        result.particles = vein.getParticles();
+        result.valves = vein.getValveLayer();
+        result.tumor = vein.getTumorLayer();
+        result.blister = blister;
+        result.tube = tube;
+        return result;
     }
 
     private function createScene():void {
-        x = -271;
+        x = -267;
         y = -356;
         addChild(bg);
 
+        vein.getVein().x = 657;
         vein.getVein().y = 631;
-        vein.getVein().x = 660;
         vein.getVein().rotation = -21.6;
         addChild(vein.getVein())
 
@@ -76,20 +73,19 @@ public class ApplicationView extends Sprite {
         addChild(tube.getAll());
     }
 
-    public function getViewModel():PlainViewModel {
-        var result:PlainViewModel = new PlainViewModel();
-        result.vein = vein;
-        result.cure = vein.getCureLayer();
-        result.particles = vein.getParticles();
-        result.valves = vein.getValveLayer();
-        result.tumor = vein.getTumorLayer();
-        result.blister = blister;
-        result.tube = tube;
-        return result;
+    private function loadCompleteListener(e:Event):void {
+        var mc:MovieClip = MovieClip(loader.content);
+        main = MovieClip(mc.getChildByName("main"));
+        bg = MovieClip(main.getChildByName("bg"));
+        vein = new Vein(main.getChildByName("vein_all"));
+        blister = new Blister(main.getChildByName("blister"));
+        tube = new Tube(main.getChildByName("tube"));
+
+        createScene();
+
+        trace("Assets initialized successfully")
+        dispatchEvent(new Event(Event.INIT));
     }
 
-    public function getLoader():Loader {
-        return loader;
-    }
 }
 }
