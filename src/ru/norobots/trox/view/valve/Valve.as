@@ -7,6 +7,13 @@ import ru.norobots.trox.view.BaseView;
 
 public class Valve extends BaseView {
 
+    /*   1                      21
+     *   healthy loop           ill loop
+     *                          21              25            37
+     *                          to ill          ill drift     to healthy
+     *
+     */
+
     public function Valve(visual:DisplayObject) {
         super(visual);
         play();
