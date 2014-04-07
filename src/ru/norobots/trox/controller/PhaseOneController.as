@@ -2,7 +2,6 @@ package ru.norobots.trox.controller {
 import ru.norobots.trox.GameSettings;
 import ru.norobots.trox.Ticker;
 import ru.norobots.trox.view.PlainViewModel;
-import ru.norobots.trox.view.Vein;
 
 public class PhaseOneController {
 

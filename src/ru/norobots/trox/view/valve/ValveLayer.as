@@ -1,7 +1,6 @@
 package ru.norobots.trox.view.valve {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
-import flash.display.MovieClip;
 
 import ru.norobots.trox.Assert;
 

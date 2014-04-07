@@ -1,5 +1,4 @@
 package ru.norobots.trox.controller {
-import ru.norobots.trox.Ticker;
 import ru.norobots.trox.view.PlainViewModel;
 
 public class PhaseTwoController {

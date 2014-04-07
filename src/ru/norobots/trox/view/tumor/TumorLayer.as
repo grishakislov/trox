@@ -3,7 +3,6 @@ import flash.display.DisplayObject;
 import flash.display.MovieClip;
 
 import ru.norobots.trox.Assert;
-import ru.norobots.trox.GameSettings;
 
 public class TumorLayer {
 

@@ -1,7 +1,6 @@
 package ru.norobots.trox.animation {
 import flash.display.MovieClip;
 
-
 public class LoopAnimation extends BaseAnimation {
 
     override protected function onTick(dt:uint):void {

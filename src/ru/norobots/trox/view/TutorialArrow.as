@@ -2,7 +2,6 @@ package ru.norobots.trox.view {
 import flash.display.DisplayObject;
 
 import ru.norobots.trox.animation.LoopAnimation;
-
 import ru.norobots.trox.animation.OnceAnimation;
 
 public class TutorialArrow extends BaseView {

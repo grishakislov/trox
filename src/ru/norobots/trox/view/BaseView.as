@@ -1,10 +1,8 @@
 package ru.norobots.trox.view {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
-import flash.display.MovieClip;
 
 import ru.norobots.trox.Assert;
-
 import ru.norobots.trox.animation.BaseAnimation;
 import ru.norobots.trox.animation.TranslationAnimation;
 

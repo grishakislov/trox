@@ -4,7 +4,6 @@ import flash.events.TimerEvent;
 import flash.utils.Timer;
 
 import ru.norobots.trox.animation.BaseAnimation;
-
 import ru.norobots.trox.animation.ErythrocyteAnimation;
 import ru.norobots.trox.animation.LoopAnimation;
 import ru.norobots.trox.view.BaseView;

@@ -1,5 +1,4 @@
 package ru.norobots.trox.view {
-import flash.display.DisplayObject;
 import flash.display.Loader;
 import flash.display.MovieClip;
 import flash.display.Sprite;
