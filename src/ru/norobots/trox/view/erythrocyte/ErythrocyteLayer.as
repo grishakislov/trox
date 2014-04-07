@@ -5,7 +5,6 @@ import flash.display.Sprite;
 
 import ru.norobots.trox.Assert;
 import ru.norobots.trox.GameSettings;
-import ru.norobots.trox.animation.LoopAnimation;
 
 public class ErythrocyteLayer {
 
@@ -14,8 +13,6 @@ public class ErythrocyteLayer {
     private static const PARTICLES_IN_STEP:uint = 7;
     private static const TOTAL_PARTICLES:uint = GameSettings.VEIN_STEPS * PARTICLES_IN_STEP;
     private var particles:Vector.<Erythrocyte> = new Vector.<Erythrocyte>();
-
-    private var settings:ParticleSettings;
 
     var layer:Sprite;
 
@@ -41,12 +38,12 @@ public class ErythrocyteLayer {
     private function initializeChildren():void {
         var current:Erythrocyte;
         var currentBundle:MovieClip;
-        settings = new ParticleSettings();
         for (var i:int = 1; i <= GameSettings.VEIN_STEPS; i++) {
             currentBundle = MovieClip(visual.getChildByName("particles" + i));
             for (var j:int = 0; j < PARTICLES_IN_STEP; j++) {
                 var mc:DisplayObject = currentBundle.getChildByName("e" + j);
-                current = new Erythrocyte(mc, settings);
+                trace("particles" + i + ":" + "e" + j);
+                current = new Erythrocyte(mc);
                 current.setVisible(false);
                 particles.push(current);
                 layer.addChild(mc);
@@ -57,7 +54,7 @@ public class ErythrocyteLayer {
     private function initializeAnimation():void {
         var numParticles = getParticlesNumByStep();
         var currentParticle:Erythrocyte;
-        for (var i:int = 0; i < numParticles; i++) {
+        for (var i:int = 0; i <= numParticles; i++) {
             currentParticle = particles[i];
             currentParticle.setVisible(true);
             currentParticle.randomizePosition();
@@ -94,15 +91,29 @@ public class ErythrocyteLayer {
         }
     }
 
+    public function moveBack():void {
+        for (var i:int = 0; i < particles.length; i++) {
+            particles[i].moveBackDelayed();
+        }
+    }
+
+    public function moveFront():void {
+        for (var i:int = 0; i < particles.length; i++) {
+            particles[i].moveFrontDelayed();
+        }
+    }
+
     private function addParticles(firstParticleIndex:uint, lastParticleIndex:uint):void {
-        var counter:uint = 1;
+        trace("Step = " + currentStep + ", indexes = " + firstParticleIndex + " " + lastParticleIndex);
+//        var counter:uint = 1;
         var delayMillis:uint;
         for (var i:int = firstParticleIndex; i <= lastParticleIndex; i++) {
             particles[i].setVisible(true);
-            delayMillis = Math.random() * 800 + 200;
-            particles[i].playDelayed(counter * delayMillis); //TODO:
+            delayMillis = Math.random() * (GameSettings.VEIN_STEP_SECONDS * 1000 / 2) + 500;
+//            particles[i].playDelayed(counter * delayMillis); //TODO:
+            particles[i].playDelayed(delayMillis); //TODO:
 //            particles[i].playParticleLooped();
-            counter++;
+//            counter++;
         }
     }
 

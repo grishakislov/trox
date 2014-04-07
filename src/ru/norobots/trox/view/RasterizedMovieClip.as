@@ -40,6 +40,7 @@ public class RasterizedMovieClip extends MovieClip {
             visual.gotoAndStop(1);
         } else {
             container = new Bitmap();
+            container.smoothing = true;
             addChild(container);
         }
 

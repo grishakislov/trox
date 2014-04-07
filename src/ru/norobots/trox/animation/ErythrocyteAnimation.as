@@ -3,10 +3,14 @@ import flash.display.MovieClip;
 
 public class ErythrocyteAnimation extends BaseAnimation {
 
-    private static const NORMAL_SKIP:uint = 4;
+    private static const NORMAL_SKIP:uint = 8;
+    private static const BACK_SKIP:int = -4;
     private static const SLOW_SKIP:uint = 0;
 
     private var back:Boolean;
+    private var keepLoop:Boolean;
+
+    private var currentIncrement:Number = NORMAL_SKIP;
 
     override protected function onTick(dt:uint):void {
         super.onTick(dt);
@@ -17,20 +21,48 @@ public class ErythrocyteAnimation extends BaseAnimation {
 
     override protected function getCurrentFrame():uint {
         var movie:MovieClip = movies[0];
-        if (movie.currentFrame >= movie.totalFrames - 1) {
-            return 1;
+        if (back) {
+            if (movie.currentFrame == 1 && !keepLoop) {
+                return movie.totalFrames;
+            }
+        } else {
+            if (movie.currentFrame == movie.totalFrames && !keepLoop) {
+                return 1;
+            }
         }
+
         return increment();
     }
 
     private function increment():uint {
         var movie:MovieClip = movies[0];
         if (back) {
-
+            if (currentIncrement > BACK_SKIP) {
+                keepLoop = true;
+                currentIncrement -= (currentIncrement - BACK_SKIP) / 100;
+            } else {
+                keepLoop = false;
+            }
+            return movie.currentFrame + Math.round(currentIncrement);
         } else {
-            return movie.currentFrame + NORMAL_SKIP;
+            if (currentIncrement < NORMAL_SKIP) {
+                keepLoop = true;
+                currentIncrement += (NORMAL_SKIP - currentIncrement) / 100;
+            } else {
+                keepLoop = false;
+            }
+
+            return movie.currentFrame + Math.round(currentIncrement);
         }
         return 0;
+    }
+
+    public function moveBack():void {
+        back = true;
+    }
+
+    public function moveFront():void {
+        back = false;
     }
 
 

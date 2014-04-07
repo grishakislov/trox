@@ -1,4 +1,5 @@
 package ru.norobots.trox.controller {
+import ru.norobots.trox.Ticker;
 import ru.norobots.trox.view.PlainViewModel;
 
 public class PhaseTwoController {
@@ -10,6 +11,7 @@ public class PhaseTwoController {
         this.view = view;
         view.tumor.lock();
         view.valves.setIll();
+        view.particles.moveBack();
     }
 
     private function onComplete():void {

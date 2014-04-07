@@ -48,17 +48,21 @@ public class ApplicationView extends Sprite {
 
         vein.getVein().y = 631;
         vein.getVein().x = 660;
-
+        vein.getVein().rotation = -21.6;
         addChild(vein.getVein())
 
-        vein.getValveLayer().getLayer().x = 925;
-        vein.getValveLayer().getLayer().y = 830;
+        vein.getValveLayer().getLayer().x = 995;
+        vein.getValveLayer().getLayer().y = 715;
+        vein.getValveLayer().getLayer().rotation = -21.6;
 
-        vein.getParticles().getLayer().x = 200;
-        vein.getParticles().getLayer().y = 680;
+        vein.getParticles().getLayer().x = 230;
+        vein.getParticles().getLayer().y = 845;
+        vein.getParticles().getLayer().rotation = -21.6;
 
-        vein.getTumorLayer().getLayer().x = 660;
-        vein.getTumorLayer().getLayer().y = 633;
+        vein.getTumorLayer().getLayer().x = 665;
+        vein.getTumorLayer().getLayer().y = 630;
+
+        vein.getTumorLayer().getLayer().rotation = -21.6;
 
         addChild(vein.getParticles().getLayer());
         addChild(vein.getValveLayer().getLayer());

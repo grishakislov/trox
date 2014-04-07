@@ -32,7 +32,7 @@ public class TumorLayer {
         var numTumors:uint = tumors.length;
         var index:uint;
         for (var i:int = 0; i < numTumors; i++) {
-            index = (tumors.length - 1) * Math.random();
+            index = (tumors.length) * Math.random();
             shuffledTumors.push(tumors.splice(index, 1)[0]);
         }
         tumors = shuffledTumors;
