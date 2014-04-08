@@ -51,5 +51,18 @@ public class InteractiveView extends BaseView {
             state = InteractiveState.IDLE;
         }
     }
+
+    public function setEnabled(value:Boolean):void {
+        if (value) {
+            getVisual().stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+            getVisual().stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+            getVisual().stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+        } else {
+            getVisual().stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+            getVisual().stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+            getVisual().stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+        }
+    }
+
 }
 }

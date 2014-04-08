@@ -5,6 +5,7 @@ public class ErythrocyteAnimation extends BaseAnimation {
 
     private static const NORMAL_SKIP:uint = 8;
     private static const BACK_SKIP:int = -4;
+
     private var back:Boolean;
     private var keepLoop:Boolean;
     private var currentIncrement:Number = NORMAL_SKIP;

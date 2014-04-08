@@ -23,18 +23,18 @@ public class Tools {
         var zip:FZip = new FZip();
         var encoder:PNGEncoder = new PNGEncoder();
         var currentPNG:ByteArray;
+
         for (var i:int = 0; i < result.length; i++) {
 
             currentPNG = encoder.encode(result[i]);
             zip.addFile("f" + i + ".png", currentPNG);
         }
 
-                var fr:FileReference = new FileReference();
+        var fr:FileReference = new FileReference();
         var zipByteArray = new ByteArray();
         zip.serialize(zipByteArray);
 
         fr.save(zipByteArray, "frames.zip");
-
     }
 }
 }

@@ -21,12 +21,20 @@ public class PhaseTwoController {
     private function onPillUsed():void {
         view.blister.setEnabled(false);
         handlePillUse();
+        var timer:Timer;
         if (view.blister.hasMorePills()) {
-            var timer:Timer = new Timer(3000, 1);
-            timer.addEventListener(TimerEvent.TIMER, onTimerComplete);
+            timer = new Timer(3000, 1);
+            timer.addEventListener(TimerEvent.TIMER, onPillTimerComplete);
+            timer.start();
+        } else {
+            timer = new Timer(4000, 1);
+            timer.addEventListener(TimerEvent.TIMER, onEndTimerComplete);
             timer.start();
         }
+    }
 
+    private function onEndTimerComplete(event:TimerEvent):void {
+        onComplete();
     }
 
     private function handlePillUse():void {
@@ -34,7 +42,7 @@ public class PhaseTwoController {
         view.cure.play();
     }
 
-    private function onTimerComplete(event:TimerEvent):void {
+    private function onPillTimerComplete(event:TimerEvent):void {
         view.blister.setEnabled(true);
     }
 

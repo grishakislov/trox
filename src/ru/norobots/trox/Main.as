@@ -23,7 +23,7 @@ public class Main extends Sprite {
     }
 
     private function onInit(event:Event):void {
-        var controller:AbstractController = AbstractController.create(view.getViewModel(), ControllerMode.GAME);
+        var controller:AbstractController = AbstractController.create(view.getViewModel(), ControllerMode.INTRO);
     }
 }
 }

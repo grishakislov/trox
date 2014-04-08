@@ -18,7 +18,8 @@ public class Blister extends InteractiveView {
         lock = getVisual().getChildByName("lock");
     }
 
-    public function setEnabled(value:Boolean):void {
+    override public function setEnabled(value:Boolean):void {
+        super.setEnabled(value);
         enabled = value;
         lock.visible = !value;
         if (value) {
