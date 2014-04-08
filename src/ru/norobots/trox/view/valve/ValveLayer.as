@@ -36,5 +36,11 @@ public class ValveLayer {
             valves[i].setIllDelayed();
         }
     }
+
+    public function setHealthy():void {
+        for (var i:int = 0; i < valves.length; i++) {
+            valves[i].setHealthy();
+        }
+    }
 }
 }

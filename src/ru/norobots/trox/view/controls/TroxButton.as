@@ -2,7 +2,10 @@ package ru.norobots.trox.view.controls {
 import flash.display.DisplayObject;
 import flash.events.MouseEvent;
 import flash.events.TimerEvent;
+import flash.geom.ColorTransform;
 import flash.utils.Timer;
+
+import ru.norobots.trox.GameSettings;
 
 import ru.norobots.trox.animation.OnceAnimation;
 
@@ -13,6 +16,20 @@ public class TroxButton extends InteractiveView{
 
     public function TroxButton(visual:DisplayObject) {
         super(visual);
+        setOut();
+    }
+
+    override protected function onMouseMove(event:MouseEvent):void {
+        super.onMouseMove(event);
+        mouseInside() ? setOver() : setOut();
+    }
+
+    private function setOver():void {
+        getVisual().transform.colorTransform = new ColorTransform(1.1, 1.1, 1.1);
+    }
+
+    private function setOut():void {
+        getVisual().transform.colorTransform = new ColorTransform(0.9, 0.9, 0.9);
     }
 
     override protected function onMouseUp(event:MouseEvent):void {
@@ -27,7 +44,7 @@ public class TroxButton extends InteractiveView{
             anim = new OnceAnimation();
             play(anim);
 
-            var timer:Timer = new Timer(500, 1);
+            var timer:Timer = new Timer(GameSettings.MILLIS_AFTER_BUTTON_CLICK, 1);
             timer.addEventListener(TimerEvent.TIMER, onTimerComplete);
             timer.start();
         }

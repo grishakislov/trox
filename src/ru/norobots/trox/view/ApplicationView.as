@@ -46,11 +46,13 @@ public class ApplicationView extends Sprite {
     public function attachIntro():void {
         attachBG();
         addChild(intro.getVisual());
+        intro.setEnabled(true);
     }
 
     public function attachEnd():void {
         attachBG();
         addChild(end.getVisual());
+        end.setEnabled(true);
     }
 
     private function attachBG():void {
@@ -58,6 +60,10 @@ public class ApplicationView extends Sprite {
     }
 
     public function clear():void {
+        tube.setEnabled(false);
+        blister.setEnabled(false);
+        end.setEnabled(false);
+        intro.setEnabled(false);
         removeChildren();
     }
 
@@ -77,7 +83,7 @@ public class ApplicationView extends Sprite {
         vein.getParticles().getLayer().y = 845;
         vein.getParticles().getLayer().rotation = -21.6;
 
-        vein.getCureLayer().getLayer().x = 220;
+        vein.getCureLayer().getLayer().x = 215;
         vein.getCureLayer().getLayer().y = 845;
         vein.getCureLayer().getLayer().rotation = -21.6;
 
@@ -93,6 +99,9 @@ public class ApplicationView extends Sprite {
 
         addChild(blister.getVisual());
         addChild(tube.getAll());
+
+        tube.setEnabled(true);
+        blister.setEnabled(true);
     }
 
     private function loadCompleteListener(e:Event):void {

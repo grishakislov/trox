@@ -13,6 +13,7 @@ public class Cure extends BaseView {
     }
 
     public function playDelayed():void {
+        getVisual().gotoAndStop(1);
         var delayMillis:uint = Math.random() * 600;
         var timer:Timer = new Timer(delayMillis, 1);
         timer.addEventListener(TimerEvent.TIMER, onTimerComplete);

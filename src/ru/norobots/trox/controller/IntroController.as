@@ -1,4 +1,9 @@
 package ru.norobots.trox.controller {
+import flash.events.TimerEvent;
+import flash.utils.Timer;
+
+import ru.norobots.trox.GameSettings;
+
 import ru.norobots.trox.view.PlainViewModel;
 
 public class IntroController extends AbstractController {

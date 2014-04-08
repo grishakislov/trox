@@ -41,6 +41,19 @@ public class Tube extends InteractiveView {
         moveCursorToMouse();
     }
 
+    override public function setEnabled(value:Boolean):void {
+        super.setEnabled(value);
+        if (!UIState.tubeSelected) {
+            return;
+        }
+        setCursorVisible(value);
+        if (value) {
+            Ticker.addTickListener(onTick);
+        } else {
+            Ticker.removeTickListener(onTick);
+        }
+    }
+
     private function moveCursorToMouse():void {
         if (gelCursor.visible) {
             var global:Point = mainVisual.localToGlobal(point);

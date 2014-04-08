@@ -2,6 +2,8 @@ package ru.norobots.trox.controller {
 import flash.events.TimerEvent;
 import flash.utils.Timer;
 
+import ru.norobots.trox.GameSettings;
+
 import ru.norobots.trox.view.PlainViewModel;
 
 public class PhaseTwoController {
@@ -14,6 +16,7 @@ public class PhaseTwoController {
         view.tumor.lock();
         view.valves.setIll();
         view.particles.moveBack();
+        view.tube.setEnabled(false);
         view.blister.setEnabled(true);
         view.blister.addActionCallback(onPillUsed);
     }
@@ -22,15 +25,22 @@ public class PhaseTwoController {
         view.blister.setEnabled(false);
         handlePillUse();
         var timer:Timer;
+
+        /*
+        My cat wrote it here:
+        n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n
+         */
+
         if (view.blister.hasMorePills()) {
-            timer = new Timer(3000, 1);
+            timer = new Timer(2000, 1);
             timer.addEventListener(TimerEvent.TIMER, onPillTimerComplete);
             timer.start();
-        } else {
-            timer = new Timer(4000, 1);
+
+            timer = new Timer(GameSettings.GAME_OVER_DELAY_MILLIS, 1);
             timer.addEventListener(TimerEvent.TIMER, onEndTimerComplete);
             timer.start();
         }
+
     }
 
     private function onEndTimerComplete(event:TimerEvent):void {
@@ -39,6 +49,9 @@ public class PhaseTwoController {
 
     private function handlePillUse():void {
         view.particles.moveFront();
+        view.valves.setHealthy();
+        view.tumor.setHealthy();
+        view.vein.shrink();
         view.cure.play();
     }
 

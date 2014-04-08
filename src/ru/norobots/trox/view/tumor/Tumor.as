@@ -4,6 +4,7 @@ import flash.display.MovieClip;
 
 import ru.norobots.trox.Ticker;
 import ru.norobots.trox.UIState;
+import ru.norobots.trox.animation.RewindAnimation;
 import ru.norobots.trox.view.TutorialArrow;
 import ru.norobots.trox.view.controls.InteractiveState;
 import ru.norobots.trox.view.controls.InteractiveView;
@@ -81,6 +82,11 @@ public class Tumor extends InteractiveView {
                 framesPassed = 0;
             }
         }
+    }
+
+    public function setHealthy():void {
+        Ticker.removeTickListener(onTick);
+        play(new RewindAnimation());
     }
 
     private function getBottomFrame():uint {

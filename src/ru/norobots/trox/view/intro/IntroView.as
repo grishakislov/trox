@@ -21,7 +21,7 @@ public class IntroView extends BaseView {
     }
 
     public function setEnabled(value:Boolean):void {
-        playButton.setEnabled(false);
+        playButton.setEnabled(value);
     }
 
 }

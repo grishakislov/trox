@@ -85,5 +85,11 @@ public class TumorLayer {
             tumors[i].lock();
         }
     }
+
+    public function setHealthy():void {
+        for (var i:int = 0; i < tumors.length; i++) {
+            tumors[i].setHealthy();
+        }
+    }
 }
 }

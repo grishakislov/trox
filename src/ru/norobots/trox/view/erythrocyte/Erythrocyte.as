@@ -3,6 +3,8 @@ import flash.display.DisplayObject;
 import flash.events.TimerEvent;
 import flash.utils.Timer;
 
+import ru.norobots.trox.GameSettings;
+
 import ru.norobots.trox.animation.BaseAnimation;
 import ru.norobots.trox.animation.ErythrocyteAnimation;
 import ru.norobots.trox.animation.LoopAnimation;
@@ -42,19 +44,15 @@ public class Erythrocyte extends BaseView {
     }
 
     public function moveFrontDelayed():void {
-        var timer:Timer = new Timer(getDelay(), 1);
+        var timer:Timer = new Timer(Math.random() * GameSettings.MAX_ERYTH_MOVING_REVERSE_MILLIS, 1);
         timer.addEventListener(TimerEvent.TIMER, onFrontTimerComplete);
         timer.start();
     }
 
     public function moveBackDelayed():void {
-        var timer:Timer = new Timer(getDelay(), 1);
+        var timer:Timer = new Timer(Math.random() * GameSettings.MAX_ERYTH_MOVING_REVERSE_MILLIS, 1);
         timer.addEventListener(TimerEvent.TIMER, onBackTimerComplete);
         timer.start();
-    }
-
-    private function getDelay():uint {
-        return Math.random() * 2000;
     }
 
     private function getAnimation():ErythrocyteAnimation {

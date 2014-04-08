@@ -4,6 +4,7 @@ import flash.display.MovieClip;
 
 import ru.norobots.trox.animation.BaseAnimation;
 import ru.norobots.trox.animation.VeinExpandAnimation;
+import ru.norobots.trox.animation.RewindAnimation;
 import ru.norobots.trox.view.cure.CureLayer;
 import ru.norobots.trox.view.erythrocyte.ErythrocyteLayer;
 import ru.norobots.trox.view.tumor.TumorLayer;
@@ -33,18 +34,21 @@ public class Vein extends BaseView {
         return vein;
     }
 
-    public function expand():BaseAnimation {
+    public function expand():void {
         var anim:BaseAnimation = new VeinExpandAnimation();
         anim.addCompleteCallback(onCurrentAnimationCompleted);
         anim.addMovie(vein);
         anim.addMovie(MovieClip(valveLayer.getLayer()));
         anim.addMovie(MovieClip(tumorLayer.getLayer()));
-        anim.run();
-        return anim;
+        play(anim);
     }
 
     public function shrink():void {
-
+        var anim:BaseAnimation = new RewindAnimation();
+        anim.addMovie(vein);
+        anim.addMovie(MovieClip(valveLayer.getLayer()));
+        anim.addMovie(MovieClip(tumorLayer.getLayer()));
+        play(anim);
     }
 
     private function onCurrentAnimationCompleted():void {

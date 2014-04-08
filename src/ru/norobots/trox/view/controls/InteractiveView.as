@@ -11,6 +11,7 @@ public class InteractiveView extends BaseView {
 
     protected var state:InteractiveState = InteractiveState.IDLE;
     private var mouseDown:Boolean;
+    private var listenersEnabled:Boolean;
 
     public function InteractiveView(visual:DisplayObject) {
         super(visual);
@@ -40,7 +41,7 @@ public class InteractiveView extends BaseView {
         getVisual().stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
     }
 
-    private function onMouseMove(event:MouseEvent):void {
+    protected function onMouseMove(event:MouseEvent):void {
         if (!mouseDown) {
             return;
         }
@@ -53,14 +54,16 @@ public class InteractiveView extends BaseView {
     }
 
     public function setEnabled(value:Boolean):void {
-        if (value) {
+        if (value && !listenersEnabled) {
             getVisual().stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
             getVisual().stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
             getVisual().stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-        } else {
+            listenersEnabled = true;
+        } else if (listenersEnabled) {
             getVisual().stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
             getVisual().stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
             getVisual().stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+            listenersEnabled = false;
         }
     }
 

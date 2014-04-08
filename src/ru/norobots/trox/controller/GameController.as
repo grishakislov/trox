@@ -23,7 +23,7 @@ public class GameController extends AbstractController {
     }
 
     private function resetGame():void {
-
+        view.appView.clear();
     }
 }
 }
