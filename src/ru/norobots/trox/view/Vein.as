@@ -51,6 +51,10 @@ public class Vein extends BaseView {
         play(anim);
     }
 
+    public function reset():void {
+
+    }
+
     private function onCurrentAnimationCompleted():void {
 
     }
@@ -67,7 +71,6 @@ public class Vein extends BaseView {
         return particles;
     }
 
-
     public function getValveLayer():ValveLayer {
         return valveLayer;
     }
@@ -80,10 +83,9 @@ public class Vein extends BaseView {
         return cureLayer;
     }
 
+
     public function getVein():RasterizedMovieClip {
         return vein;
     }
-
-
 }
 }

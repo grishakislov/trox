@@ -67,5 +67,9 @@ public class Tube extends InteractiveView {
             setCursorVisible(!gelCursor.visible);
         }
     }
+
+    public function reset():void {
+        //TODO: ?
+    }
 }
 }

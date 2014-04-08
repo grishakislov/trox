@@ -58,6 +58,15 @@ public class ErythrocyteLayer {
         return layer;
     }
 
+    public function reset():void {
+        currentStep = 1;
+        for (var i:int = 0; i < particles.length; i++) {
+            particles[i].reset();
+            particles[i].setVisible(false);
+        }
+        initializeAnimation();
+    }
+
     protected function initializeChildren():void {
         var current:Erythrocyte;
         var currentBundle:MovieClip;
@@ -115,6 +124,5 @@ public class ErythrocyteLayer {
             particles[i].playDelayed(delayMillis);
         }
     }
-
 }
 }

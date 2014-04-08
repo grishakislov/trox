@@ -24,6 +24,17 @@ public class GameController extends AbstractController {
 
     private function resetGame():void {
         view.appView.clear();
+
+        view.blister.reset();
+        view.tube.reset();
+        view.tumor.reset();
+        view.particles.reset();
+        view.vein.reset();
+
+        view.appView.attachGame();
+
+        var phase1:PhaseOneController = new PhaseOneController(view);
+        phase1.addCompleteCallback(onPhaseOneComplete);
     }
 }
 }

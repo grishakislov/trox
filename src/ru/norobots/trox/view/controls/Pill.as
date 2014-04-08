@@ -21,5 +21,10 @@ public class Pill extends BaseView {
         used = true;
         useMc.visible = false;
     }
+
+    public function reset():void {
+        used = false;
+        useMc.visible = true;
+    }
 }
 }

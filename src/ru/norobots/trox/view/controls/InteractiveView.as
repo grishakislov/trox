@@ -15,8 +15,11 @@ public class InteractiveView extends BaseView {
 
     public function InteractiveView(visual:DisplayObject) {
         super(visual);
-        getVisual().addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-
+        if (getVisual().stage == null) {
+            getVisual().addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+        } else {
+            setEnabled(true);
+        }
     }
 
     protected function mouseInside():Boolean {
@@ -39,6 +42,7 @@ public class InteractiveView extends BaseView {
         getVisual().stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
         getVisual().stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
         getVisual().stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+        listenersEnabled = true;
     }
 
     protected function onMouseMove(event:MouseEvent):void {
@@ -54,16 +58,20 @@ public class InteractiveView extends BaseView {
     }
 
     public function setEnabled(value:Boolean):void {
-        if (value && !listenersEnabled) {
-            getVisual().stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-            getVisual().stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-            getVisual().stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-            listenersEnabled = true;
-        } else if (listenersEnabled) {
-            getVisual().stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-            getVisual().stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-            getVisual().stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-            listenersEnabled = false;
+        if (value) {
+            if (!listenersEnabled) {
+                getVisual().stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+                getVisual().stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+                getVisual().stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+                listenersEnabled = true;
+            }
+        } else {
+            if (listenersEnabled) {
+                getVisual().stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+                getVisual().stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+                getVisual().stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+                listenersEnabled = false;
+            }
         }
     }
 

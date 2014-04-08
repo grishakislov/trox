@@ -21,7 +21,7 @@ public class EndView extends BaseView {
     }
 
     public function setEnabled(value:Boolean):void {
-        replayButton.setEnabled(false);
+        replayButton.setEnabled(value);
     }
 
 

@@ -29,6 +29,13 @@ public class Blister extends InteractiveView {
         }
     }
 
+    public function reset():void {
+        pill1.reset();
+        pill2.reset();
+        enabled = false;
+        lock.visible = true;
+    }
+
     public function addActionCallback(value:Function):void {
         callback = value;
     }

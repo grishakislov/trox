@@ -55,14 +55,16 @@ public class Erythrocyte extends BaseView {
         timer.start();
     }
 
+    public function reset():void {
+        stop();
+        getVisual().gotoAndStop(1);
+    }
+
     private function getAnimation():ErythrocyteAnimation {
         return ErythrocyteAnimation(animation);
     }
 
     private function onTimerComplete(event:TimerEvent):void {
-//        if (animation != null) {
-//            animation.clear();
-//        }
         var anim:ErythrocyteAnimation = new ErythrocyteAnimation();
         anim.addMovie(getVisual());
         play(anim);

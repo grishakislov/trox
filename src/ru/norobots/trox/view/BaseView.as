@@ -34,10 +34,6 @@ public class BaseView {
         animation.clear();
     }
 
-    public function reset():void {
-
-    }
-
     public function setVisible(value:Boolean):void {
         visual.visible = value;
     }

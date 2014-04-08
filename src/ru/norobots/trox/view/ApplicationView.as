@@ -61,6 +61,7 @@ public class ApplicationView extends Sprite {
 
     public function clear():void {
         tube.setEnabled(false);
+        vein.getTumorLayer().setEnabled(false);
         blister.setEnabled(false);
         end.setEnabled(false);
         intro.setEnabled(false);
@@ -75,7 +76,7 @@ public class ApplicationView extends Sprite {
         vein.getVein().rotation = -21.6;
         addChild(vein.getVein())
 
-        vein.getValveLayer().getLayer().x = 995;
+        vein.getValveLayer().getLayer().x = 990;
         vein.getValveLayer().getLayer().y = 715;
         vein.getValveLayer().getLayer().rotation = -21.6;
 
@@ -100,6 +101,7 @@ public class ApplicationView extends Sprite {
         addChild(blister.getVisual());
         addChild(tube.getAll());
 
+        vein.getTumorLayer().setEnabled(true);
         tube.setEnabled(true);
         blister.setEnabled(true);
     }

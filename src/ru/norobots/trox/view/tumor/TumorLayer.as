@@ -49,6 +49,12 @@ public class TumorLayer {
         showNextTumors();
     }
 
+    public function setEnabled(value:Boolean):void {
+        for (var i:int = 0; i < tumors.length; i++) {
+            tumors[i].setEnabled(value);
+        }
+    }
+
     private function showNextTumors():void {
         updateSteps()
         for (var i:int = getFirstIndex(); i <= getLastIndex(); i++) {
@@ -83,6 +89,16 @@ public class TumorLayer {
     public function lock():void {
         for (var i:int = 0; i < tumors.length; i++) {
             tumors[i].lock();
+        }
+    }
+
+    public function reset():void {
+        unlock();
+    }
+
+    public function unlock():void {
+        for (var i:int = 0; i < tumors.length; i++) {
+            tumors[i].unlock();
         }
     }
 

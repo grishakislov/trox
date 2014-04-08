@@ -50,6 +50,10 @@ public class Tumor extends InteractiveView {
         locked = true;
     }
 
+    public function unlock():void {
+        locked = false;
+    }
+
     private function onTick(dt:uint):void {
 
         framesPassed++;
