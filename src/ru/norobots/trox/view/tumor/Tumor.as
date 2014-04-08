@@ -52,6 +52,7 @@ public class Tumor extends InteractiveView {
 
     public function unlock():void {
         locked = false;
+        arrow2.getVisual().gotoAndStop(1);
     }
 
     private function onTick(dt:uint):void {

@@ -81,7 +81,6 @@ public class TumorLayer {
         return lastIndexesByStep[currentStep - 1];
     }
 
-
     public function getLayer():DisplayObject {
         return layer;
     }
@@ -94,6 +93,8 @@ public class TumorLayer {
 
     public function reset():void {
         unlock();
+        updateSteps();
+        currentStep = 1;
     }
 
     public function unlock():void {

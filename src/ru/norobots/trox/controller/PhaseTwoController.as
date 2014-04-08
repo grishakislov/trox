@@ -17,6 +17,13 @@ public class PhaseTwoController {
         view.valves.setIll();
         view.particles.moveBack();
         view.tube.setEnabled(false);
+
+        var timer:Timer = new Timer(GameSettings.BLISTER_ENABLE_DELAY_MILLIS, 1);
+        timer.addEventListener(TimerEvent.TIMER, onBlisterTimerComplete);
+        timer.start();
+    }
+
+    private function onBlisterTimerComplete(event:TimerEvent):void {
         view.blister.setEnabled(true);
         view.blister.addActionCallback(onPillUsed);
     }
