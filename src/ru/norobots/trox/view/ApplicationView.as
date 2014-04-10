@@ -1,4 +1,6 @@
 package ru.norobots.trox.view {
+import flash.display.Bitmap;
+import flash.display.BitmapData;
 import flash.display.Loader;
 import flash.display.MovieClip;
 import flash.display.Sprite;
@@ -27,6 +29,7 @@ public class ApplicationView extends Sprite {
         var veinMC:ByteArray = new Resources.TROX();
         loader.contentLoaderInfo.addEventListener(Event.INIT, loadCompleteListener);
         loader.loadBytes(veinMC);
+        mask = new Bitmap(new BitmapData(800, 600));
     }
 
     public function getViewModel():PlainViewModel {
@@ -34,7 +37,7 @@ public class ApplicationView extends Sprite {
         result.appView = this;
         result.intro = intro;
         result.vein = vein;
-        result.cure = vein.getCureLayer();
+        result.cure = vein.getCure();
         result.particles = vein.getParticles();
         result.valves = vein.getValveLayer();
         result.tumor = vein.getTumorLayer();
@@ -84,9 +87,9 @@ public class ApplicationView extends Sprite {
         vein.getParticles().getLayer().y = 845;
         vein.getParticles().getLayer().rotation = -21.6;
 
-        vein.getCureLayer().getLayer().x = 215;
-        vein.getCureLayer().getLayer().y = 845;
-        vein.getCureLayer().getLayer().rotation = -21.6;
+        vein.getCure().getVisual().x = 220;
+        vein.getCure().getVisual().y = 855;
+        vein.getCure().getVisual().rotation = -3;
 
         vein.getTumorLayer().getLayer().x = 665;
         vein.getTumorLayer().getLayer().y = 630;
@@ -94,7 +97,7 @@ public class ApplicationView extends Sprite {
         vein.getTumorLayer().getLayer().rotation = -21.6;
 
         addChild(vein.getParticles().getLayer());
-        addChild(vein.getCureLayer().getLayer());
+        addChild(vein.getCure().getVisual());
         addChild(vein.getValveLayer().getLayer());
         addChild(vein.getTumorLayer().getLayer());
 

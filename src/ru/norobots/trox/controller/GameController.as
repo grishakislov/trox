@@ -30,6 +30,8 @@ public class GameController extends AbstractController {
         view.tumor.reset();
         view.particles.reset();
         view.vein.reset();
+        view.cure.stop();
+        view.cure.getVisual().gotoAndStop(1);
 
         view.appView.attachGame();
 

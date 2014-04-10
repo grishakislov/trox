@@ -3,18 +3,20 @@ import flash.display.DisplayObject;
 import flash.events.MouseEvent;
 import flash.geom.ColorTransform;
 
+import ru.norobots.trox.animation.OnceAnimation;
+
+import ru.norobots.trox.view.BaseView;
+
 public class Blister extends InteractiveView {
 
     private var enabled:Boolean;
     private var callback:Function;
-    private var pill1:Pill;
-    private var pill2:Pill;
+    private var animatedBlister:BaseView;
     private var lock:DisplayObject;
 
     public function Blister(visual:DisplayObject) {
         super(visual);
-        pill1 = new Pill(getVisual().getChildByName("pill1"));
-        pill2 = new Pill(getVisual().getChildByName("pill2"));
+        animatedBlister = new BaseView(getVisual().getChildByName("blister_anim"));
         lock = getVisual().getChildByName("lock");
     }
 
@@ -30,28 +32,14 @@ public class Blister extends InteractiveView {
     }
 
     public function reset():void {
-        pill1.reset();
-        pill2.reset();
+        animatedBlister.stop();
+        animatedBlister.getVisual().gotoAndStop(1);
         enabled = false;
         lock.visible = true;
     }
 
     public function addActionCallback(value:Function):void {
         callback = value;
-    }
-
-    public function hasMorePills():Boolean {
-        return !pill2.alreadyUsed();
-    }
-
-    private function usePill():void {
-        if (!pill1.alreadyUsed()) {
-            pill1.usePill();
-            fireCallback();
-        } else if (!pill2.alreadyUsed()) {
-            pill2.usePill();
-            fireCallback();
-        }
     }
 
     private function fireCallback():void {
@@ -63,8 +51,15 @@ public class Blister extends InteractiveView {
     override protected function onMouseUp(event:MouseEvent):void {
         super.onMouseUp(event);
         if (enabled && mouseInside()) {
-            usePill();
+            enabled = false;
+            var once:OnceAnimation = new OnceAnimation();
+            once.addCompleteCallback(onBlisterAnimationCompleted);
+            animatedBlister.play(once);
         }
+    }
+
+    private function onBlisterAnimationCompleted():void {
+        fireCallback();
     }
 }
 }

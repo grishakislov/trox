@@ -3,6 +3,7 @@ import flash.events.TimerEvent;
 import flash.utils.Timer;
 
 import ru.norobots.trox.GameSettings;
+import ru.norobots.trox.animation.OnceAnimation;
 
 import ru.norobots.trox.view.PlainViewModel;
 
@@ -25,45 +26,40 @@ public class PhaseTwoController {
 
     private function onBlisterTimerComplete(event:TimerEvent):void {
         view.blister.setEnabled(true);
-        view.blister.addActionCallback(onPillUsed);
+        view.blister.addActionCallback(onPillsUsed);
     }
 
-    private function onPillUsed():void {
-        view.blister.setEnabled(false);
-        handlePillUse();
-        var timer:Timer;
-
+    private function onPillsUsed():void {
         /*
         My cat wrote it here:
         n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n
          */
+        handlePillUse();
+    }
 
-        if (view.blister.hasMorePills()) {
-            timer = new Timer(2000, 1);
-            timer.addEventListener(TimerEvent.TIMER, onPillTimerComplete);
-            timer.start();
+    private function handlePillUse():void {
+        view.cure.play(new OnceAnimation());
 
-            timer = new Timer(GameSettings.GAME_OVER_DELAY_MILLIS, 1);
-            timer.addEventListener(TimerEvent.TIMER, onEndTimerComplete);
-            timer.start();
-        }
+        var timer:Timer = new Timer(GameSettings.CURE_DELAY, 1);
+        timer.addEventListener(TimerEvent.TIMER, onCureTimerComplete);
+        timer.start();
+    }
+
+    private function onCureTimerComplete(event:TimerEvent):void {
+        view.particles.moveFront();
+        view.valves.setHealthy();
+        view.tumor.setHealthy();
+        view.vein.shrink();
+
+
+        var timer:Timer = new Timer(GameSettings.GAME_OVER_DELAY_MILLIS, 1);
+        timer.addEventListener(TimerEvent.TIMER, onEndTimerComplete);
+        timer.start();
 
     }
 
     private function onEndTimerComplete(event:TimerEvent):void {
         onComplete();
-    }
-
-    private function handlePillUse():void {
-        view.particles.moveFront();
-        view.valves.setHealthy();
-        view.tumor.setHealthy();
-        view.vein.shrink();
-        view.cure.play();
-    }
-
-    private function onPillTimerComplete(event:TimerEvent):void {
-        view.blister.setEnabled(true);
     }
 
     private function onComplete():void {

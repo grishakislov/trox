@@ -20,6 +20,8 @@ public class Main extends Sprite {
         view.addEventListener(Event.INIT, onInit)
         view.initialize();
         addChild(view);
+        stage.scaleMode = "noScale";
+        stage.align = "tl";
     }
 
     private function onInit(event:Event):void {

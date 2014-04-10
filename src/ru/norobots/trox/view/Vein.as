@@ -3,9 +3,8 @@ import flash.display.DisplayObject;
 import flash.display.MovieClip;
 
 import ru.norobots.trox.animation.BaseAnimation;
-import ru.norobots.trox.animation.VeinExpandAnimation;
 import ru.norobots.trox.animation.RewindAnimation;
-import ru.norobots.trox.view.cure.CureLayer;
+import ru.norobots.trox.animation.VeinExpandAnimation;
 import ru.norobots.trox.view.erythrocyte.ErythrocyteLayer;
 import ru.norobots.trox.view.tumor.TumorLayer;
 import ru.norobots.trox.view.valve.ValveLayer;
@@ -14,7 +13,7 @@ public class Vein extends BaseView {
 
     private var vein:RasterizedMovieClip;
     private var particles:ErythrocyteLayer;
-    private var cureLayer:CureLayer;
+    private var cureLayer:BaseView;
     private var valveLayer:ValveLayer;
     private var tumorLayer:TumorLayer;
 
@@ -30,7 +29,7 @@ public class Vein extends BaseView {
         initializeValveLayer(mc);
         initializeTumorLayer(mc);
         particles = new ErythrocyteLayer(mc.getChildByName("particles"));
-        cureLayer = new CureLayer(mc.getChildByName("cure"));
+        cureLayer = new BaseView(mc.getChildByName("cure"));
         return vein;
     }
 
@@ -79,7 +78,7 @@ public class Vein extends BaseView {
         return tumorLayer;
     }
 
-    public function getCureLayer():CureLayer {
+    public function getCure():BaseView {
         return cureLayer;
     }
 

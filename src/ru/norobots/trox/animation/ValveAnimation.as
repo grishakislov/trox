@@ -3,21 +3,21 @@ import flash.display.MovieClip;
 
 public class ValveAnimation extends BaseAnimation {
 
-    /*   1                      21
+    /*   1                      41
      *   healthy loop           ill loop
-     *                          21              25            37
+     *                          41              49            87
      *                          to ill          ill drift     to healthy
      *
      */
 
     private static const HEALTHY_FIRST:uint = 1;
-    private static const HEALTHY_LAST:uint = 20;
-    private static const ILL_FIRST:uint = 25;
-    private static const ILL_LAST:uint = 36;
-    private static const ILL_TO_HEALTH_T_FIRST:uint = 37;
-    private static const ILL_TO_HEALTH_T_LAST:uint = 40;
-    private static const HEALTH_TO_ILL_T_FIRST:uint = 21;
-    private static const HEALTH_TO_ILL_T_LAST:uint = 24;
+    private static const HEALTHY_LAST:uint = 40;
+    private static const ILL_FIRST:uint = 49;
+    private static const ILL_LAST:uint = 86;
+    private static const ILL_TO_HEALTH_T_FIRST:uint = 87;
+    private static const ILL_TO_HEALTH_T_LAST:uint = 94;
+    private static const HEALTH_TO_ILL_T_FIRST:uint = 41;
+    private static const HEALTH_TO_ILL_T_LAST:uint = 48;
 
     private var ill:Boolean = false; //double-stated
 
