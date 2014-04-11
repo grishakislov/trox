@@ -25,7 +25,7 @@ public class Tube extends InteractiveView {
         return mainVisual;
     }
 
-    private function setCursorVisible(value:Boolean):void {
+    public function setCursorVisible(value:Boolean):void {
         gelCursor.visible = value;
         UIState.tubeSelected = value;
         if (value) {

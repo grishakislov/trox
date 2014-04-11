@@ -5,10 +5,26 @@ import ru.norobots.trox.Ticker;
 
 public class RewindAnimation extends BaseAnimation {
 
+    private var skip:uint;
+    private var skipped:uint;
+
+    public function RewindAnimation(skipFrames:uint = 0) {
+        this.skip = skipFrames;
+    }
+
     override protected function onTick(dt:uint):void {
         super.onTick(dt);
         for (var i:int = 0; i < movies.length; i++) {
-            movies[i].gotoAndStop(getCurrentFrame());
+            if (skip > 0) {
+                if (skipped >= skip) {
+                    skipped = 0;
+                    movies[i].gotoAndStop(getCurrentFrame());
+                }
+                skipped++;
+                !1;
+            } else {
+                movies[i].gotoAndStop(getCurrentFrame());
+            }
         }
 
         if (movies[0].currentFrame == 1) {

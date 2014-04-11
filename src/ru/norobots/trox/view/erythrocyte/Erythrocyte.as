@@ -1,6 +1,7 @@
 package ru.norobots.trox.view.erythrocyte {
 import flash.display.DisplayObject;
 import flash.events.TimerEvent;
+import flash.sampler.getSavedThis;
 import flash.utils.Timer;
 
 import ru.norobots.trox.GameSettings;
@@ -13,6 +14,7 @@ import ru.norobots.trox.view.BaseView;
 public class Erythrocyte extends BaseView {
 
     private var innerParticleAnim:BaseView;
+    private var hide:Boolean;
 
     public function Erythrocyte(visual:DisplayObject) {
         super(visual);
@@ -43,7 +45,8 @@ public class Erythrocyte extends BaseView {
         }
     }
 
-    public function moveFrontDelayed():void {
+    public function moveFrontDelayed(hide:Boolean):void {
+        this.hide = hide;
         var timer:Timer = new Timer(Math.random() * GameSettings.MAX_ERYTH_MOVING_REVERSE_MILLIS, 1);
         timer.addEventListener(TimerEvent.TIMER, onFrontTimerComplete);
         timer.start();
@@ -57,6 +60,8 @@ public class Erythrocyte extends BaseView {
 
     public function reset():void {
         stop();
+        hide = false;
+        getVisual().alpha = 0.5;
         getVisual().gotoAndStop(1);
     }
 
@@ -71,7 +76,7 @@ public class Erythrocyte extends BaseView {
     }
 
     private function onFrontTimerComplete(event:TimerEvent):void {
-        getAnimation().moveFront();
+        getAnimation().moveFront(hide);
     }
 
     private function onBackTimerComplete(event:TimerEvent):void {

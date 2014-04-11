@@ -50,7 +50,7 @@ public class ErythrocyteLayer {
 
     public function moveFront():void {
         for (var i:int = 0; i < particles.length; i++) {
-            particles[i].moveFrontDelayed();
+            particles[i].moveFrontDelayed(i > 7);
         }
     }
 

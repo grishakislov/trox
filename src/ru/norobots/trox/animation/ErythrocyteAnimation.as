@@ -9,6 +9,7 @@ public class ErythrocyteAnimation extends BaseAnimation {
     private var back:Boolean;
     private var keepLoop:Boolean;
     private var currentIncrement:Number = NORMAL_SKIP;
+    private var hide:Boolean;
 
     override protected function onTick(dt:uint):void {
         super.onTick(dt);
@@ -27,6 +28,11 @@ public class ErythrocyteAnimation extends BaseAnimation {
             if (movie.currentFrame == movie.totalFrames) {
                 return 1;
             }
+            if (hide) {
+                if (movie.alpha > 0) {
+                    movie.alpha -= 0.005;
+                }
+            }
         }
 
         return increment();
@@ -36,9 +42,9 @@ public class ErythrocyteAnimation extends BaseAnimation {
         back = true;
     }
 
-    public function moveFront():void {
-        trace("Front!");
+    public function moveFront(hide:Boolean):void {
         back = false;
+        this.hide = hide;
     }
 
     private function increment():uint {
