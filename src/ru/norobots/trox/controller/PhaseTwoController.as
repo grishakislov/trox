@@ -16,7 +16,6 @@ public class PhaseTwoController {
         this.view = view;
         view.tumor.lock();
         view.valves.setIll();
-        view.particles.moveBack();
         view.tube.setEnabled(false);
 
         var timer:Timer = new Timer(GameSettings.BLISTER_ENABLE_DELAY_MILLIS, 1);
@@ -46,7 +45,7 @@ public class PhaseTwoController {
     }
 
     private function onCureTimerComplete(event:TimerEvent):void {
-        view.particles.moveFront();
+        view.particles.setStep(1);
         view.valves.setHealthy();
         view.tumor.setHealthy();
         view.vein.shrink();

@@ -9,13 +9,10 @@ import ru.norobots.trox.GameSettings;
 public class ErythrocyteLayer {
 
     private static const PARTICLES_IN_STEP:uint = 7;
-    private static const TOTAL_PARTICLES:uint = GameSettings.VEIN_STEPS * PARTICLES_IN_STEP;
     private var layer:Sprite;
     private var currentStep:uint = 1;
     private var visual:MovieClip;
     private var particles:Vector.<Erythrocyte> = new Vector.<Erythrocyte>();
-    private var numVisibleParticles:uint = 0;
-
 
     public function ErythrocyteLayer(visual:DisplayObject) {
         Assert.notNull(visual);
@@ -23,34 +20,19 @@ public class ErythrocyteLayer {
         layer = new Sprite();
         initializeChildren();
         initializeAnimation();
-
-//        for (var i:int = 1; i <= GameSettings.VEIN_STEPS; i++) {
-//            currentStep = i;
-//            trace("Current step: " + i);
-//            trace(getFirstParticleIndex());
-//            trace(getLastParticleIndex());
-//            trace("========================");
-//            trace("");
-//        }
     }
 
     public function setStep(step:uint):void {
-        trace("Step " + step);
         currentStep = step;
         if (currentStep > 1) { //Because first step already initialized
             addParticles(getFirstParticleIndex(), getLastParticleIndex());
+        } else {
+            for (var i:int = 0; i < particles.length; i++) {
+                particles[i].setShowed(i <= 7);
+            }
         }
-    }
-
-    public function moveBack():void {
-        for (var i:int = 0; i < particles.length; i++) {
-            particles[i].moveBackDelayed();
-        }
-    }
-
-    public function moveFront():void {
-        for (var i:int = 0; i < particles.length; i++) {
-            particles[i].moveFrontDelayed(i > 7);
+        for (var j:int = 0; j < particles.length; j++) {
+            particles[j].setStep(currentStep);
         }
     }
 
@@ -62,7 +44,8 @@ public class ErythrocyteLayer {
         currentStep = 1;
         for (var i:int = 0; i < particles.length; i++) {
             particles[i].reset();
-            particles[i].setVisible(false);
+            particles[i].setShowed(true);
+
         }
         initializeAnimation();
     }
@@ -74,9 +57,9 @@ public class ErythrocyteLayer {
             currentBundle = MovieClip(visual.getChildByName("particles" + i));
             for (var j:int = 0; j < PARTICLES_IN_STEP; j++) {
                 var mc:DisplayObject = currentBundle.getChildByName("e" + j);
-                trace("particles" + i + ":" + "e" + j);
+//                trace("particles" + i + ":" + "e" + j);
                 current = new Erythrocyte(mc);
-                current.setVisible(false);
+//                current.setVisible(false);
                 particles.push(current);
                 layer.addChild(mc);
             }
@@ -88,10 +71,8 @@ public class ErythrocyteLayer {
         var currentParticle:Erythrocyte;
         for (var i:int = 0; i <= numParticles; i++) {
             currentParticle = particles[i];
-            currentParticle.setVisible(true);
             currentParticle.randomizePosition();
             currentParticle.playDelayed(0);
-            numVisibleParticles++;
         }
     }
 

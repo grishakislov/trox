@@ -13,13 +13,11 @@ import ru.norobots.trox.view.BaseView;
 
 public class Erythrocyte extends BaseView {
 
-    private var innerParticleAnim:BaseView;
     private var hide:Boolean;
+    private var step:uint;
 
     public function Erythrocyte(visual:DisplayObject) {
         super(visual);
-        innerParticleAnim = new BaseView(getVisual().getChildByName("particle_anim"));
-        innerParticleAnim.play(new LoopAnimation());
         getVisual().alpha = 0.5;
     }
 
@@ -28,34 +26,17 @@ public class Erythrocyte extends BaseView {
     }
 
     public function randomizePosition():void {
-        getVisual().gotoAndStop(Math.floor(Math.random() * getVisual().totalFrames));
+        getVisual().gotoAndStop(Math.floor(Math.random() * (getVisual().totalFrames - 1)));
     }
 
     public function playDelayed(delayMillis:uint):void {
-//        if (animation != null) {
-//            animation.stop();
-//        }
         if (delayMillis == 0) {
             onTimerComplete(null);
         } else {
-            trace ("Mimimillis: " + delayMillis);
             var timer:Timer = new Timer(delayMillis, 1);
             timer.addEventListener(TimerEvent.TIMER, onTimerComplete);
             timer.start();
         }
-    }
-
-    public function moveFrontDelayed(hide:Boolean):void {
-        this.hide = hide;
-        var timer:Timer = new Timer(Math.random() * GameSettings.MAX_ERYTH_MOVING_REVERSE_MILLIS, 1);
-        timer.addEventListener(TimerEvent.TIMER, onFrontTimerComplete);
-        timer.start();
-    }
-
-    public function moveBackDelayed():void {
-        var timer:Timer = new Timer(Math.random() * GameSettings.MAX_ERYTH_MOVING_REVERSE_MILLIS, 1);
-        timer.addEventListener(TimerEvent.TIMER, onBackTimerComplete);
-        timer.start();
     }
 
     public function reset():void {
@@ -69,22 +50,25 @@ public class Erythrocyte extends BaseView {
         return ErythrocyteAnimation(animation);
     }
 
+    public function setShowed(value:Boolean):void {
+        if (getAnimation() != null) {
+            getAnimation().setShowed(value);
+        }
+    }
+
     private function onTimerComplete(event:TimerEvent):void {
         var anim:ErythrocyteAnimation = new ErythrocyteAnimation();
         anim.addMovie(getVisual());
+        anim.setStep(step);
         play(anim);
     }
 
-    private function onFrontTimerComplete(event:TimerEvent):void {
-        getAnimation().moveFront(hide);
-    }
-
-    private function onBackTimerComplete(event:TimerEvent):void {
-        if (getAnimation() != null) { //debug case only
-            getAnimation().moveBack();
-        } else {
-            !1;
+    public function setStep(value:uint):void {
+        step = value;
+        if (getAnimation() != null) {
+            getAnimation().setStep(value);
         }
     }
+
 }
 }
