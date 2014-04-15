@@ -7,22 +7,29 @@ import flash.ui.Mouse;
 
 import ru.norobots.trox.Ticker;
 import ru.norobots.trox.UIState;
+import ru.norobots.trox.view.Glow;
 
 public class Tube extends InteractiveView {
 
     var point:Point = new Point(0,0);
     private var gelCursor:DisplayObject;
     private var mainVisual:MovieClip;
+    private var glow:Glow;
 
     public function Tube(visual:DisplayObject) {
         mainVisual = MovieClip (visual);
         super(mainVisual.getChildByName("tube_view"));
         gelCursor = mainVisual.getChildByName("gel");
         gelCursor.visible = false;
+        glow = new Glow(mainVisual.getChildByName("glow"));
     }
 
     public function getAll():MovieClip {
         return mainVisual;
+    }
+
+    public function setGlowShowed(value:Boolean):void {
+        glow.setVisible(value);
     }
 
     public function setCursorVisible(value:Boolean):void {
@@ -43,6 +50,12 @@ public class Tube extends InteractiveView {
 
     override public function setEnabled(value:Boolean):void {
         super.setEnabled(value);
+        trace("TUBE: " + value);
+        if (value) {
+            glow.show();
+        } else {
+            glow.hide();
+        }
         if (!UIState.tubeSelected) {
             return;
         }
@@ -59,12 +72,6 @@ public class Tube extends InteractiveView {
             var global:Point = mainVisual.localToGlobal(point);
             gelCursor.x = mainVisual.stage.mouseX - global.x;
             gelCursor.y = mainVisual.stage.mouseY - global.y;
-        }
-    }
-
-    override protected function onMouseDown(event:MouseEvent):void {
-        if (mouseInside()) {
-            setCursorVisible(!gelCursor.visible);
         }
     }
 

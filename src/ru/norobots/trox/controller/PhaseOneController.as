@@ -15,7 +15,10 @@ public class PhaseOneController {
 
     public function PhaseOneController(view:PlainViewModel) {
         this.view = view;
+        view.blister.setGlowShowed(false);
         view.blister.setEnabled(false);
+        view.tube.setGlowShowed(true);
+        view.tube.setEnabled(true);
         view.tube.setCursorVisible(true);
         millisTotal = GameSettings.VEIN_STEP_SECONDS * GameSettings.VEIN_STEPS * 1000;
         Ticker.addTickListener(onTick);
