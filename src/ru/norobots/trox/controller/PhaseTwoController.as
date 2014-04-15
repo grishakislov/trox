@@ -15,7 +15,6 @@ public class PhaseTwoController {
     public function PhaseTwoController(view:PlainViewModel) {
         this.view = view;
         view.tumor.lock();
-        view.valves.setIll();
         view.tube.setEnabled(false);
 
         var timer:Timer = new Timer(GameSettings.BLISTER_ENABLE_DELAY_MILLIS, 1);

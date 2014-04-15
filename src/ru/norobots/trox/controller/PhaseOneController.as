@@ -50,6 +50,7 @@ public class PhaseOneController {
             view.vein.expand();
             view.particles.setStep(currentVeinStep);
             view.tumor.setStep(currentVeinStep);
+            view.valves.illMore();
         } else {
             onComplete();
         }

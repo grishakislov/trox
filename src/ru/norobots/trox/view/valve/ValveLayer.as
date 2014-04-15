@@ -8,6 +8,7 @@ public class ValveLayer {
 
     private var layer:MovieClip;
     private var valves:Vector.<Valve> = new Vector.<Valve>();
+    private var illValvesNum:uint = 0;
 
     public function ValveLayer(layer:DisplayObject) {
         this.layer = MovieClip(layer);
@@ -20,7 +21,20 @@ public class ValveLayer {
         for (var i:int = 1; i <= NUM_VALVES; i++) {
             addValve(layer.getChildByName("valve" + i));
         }
+        shuffle();
     }
+
+    private function shuffle():void {
+        var shuffledValves:Vector.<Valve> = new Vector.<Valve>();
+        var numValves:uint = valves.length;
+        var index:uint;
+        for (var i:int = 0; i < numValves; i++) {
+            index = (valves.length) * Math.random();
+            shuffledValves.push(valves.splice(index, 1)[0]);
+        }
+        valves = shuffledValves;
+    }
+
 
     public function addValve(valve:DisplayObject):void {
         Assert.notNull(valve);
@@ -31,10 +45,11 @@ public class ValveLayer {
         return layer;
     }
 
-    public function setIll():void {
-        for (var i:int = 0; i < valves.length; i++) {
-            valves[i].setIllDelayed();
+    public function illMore():void {
+        if (illValvesNum < valves.length) {
+            valves[illValvesNum].setIllDelayed();
         }
+        illValvesNum++;
     }
 
     public function setHealthy():void {

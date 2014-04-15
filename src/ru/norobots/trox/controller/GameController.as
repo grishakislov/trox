@@ -24,7 +24,6 @@ public class GameController extends AbstractController {
 
     private function resetGame():void {
         view.appView.clear();
-
         view.blister.reset();
         view.tube.reset();
         view.tumor.reset();
@@ -32,9 +31,8 @@ public class GameController extends AbstractController {
         view.vein.reset();
         view.cure.stop();
         view.cure.getVisual().gotoAndStop(1);
-
+        view.appView.getEnd().getReplayButton().setUsed(false);
         view.appView.attachGame();
-
         var phase1:PhaseOneController = new PhaseOneController(view);
         phase1.addCompleteCallback(onPhaseOneComplete);
     }

@@ -13,6 +13,7 @@ public class TroxButton extends InteractiveView{
 
     private var completeCallback:Function;
     private var anim:OnceAnimation;
+    private var used:Boolean = false;
 
     public function TroxButton(visual:DisplayObject) {
         super(visual);
@@ -34,7 +35,11 @@ public class TroxButton extends InteractiveView{
 
     override protected function onMouseUp(event:MouseEvent):void {
         super.onMouseUp(event);
+        if (used) {
+            return;
+        }
         if (mouseInside()) {
+            used = true;
 
             if (anim != null) {
                 anim.clear();
@@ -62,6 +67,10 @@ public class TroxButton extends InteractiveView{
 
     public function addCallback(value:Function):void {
         completeCallback = value;
+    }
+
+    public function setUsed(value:Boolean):void {
+        used = value;
     }
 }
 }

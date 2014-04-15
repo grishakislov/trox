@@ -95,7 +95,8 @@ public class Tumor extends InteractiveView {
     }
 
     private function getBottomFrame():uint {
-        return currentStep * 4;
+//        return currentStep * 4;
+        return 1;
     }
 
     private function getFramesToSkip():uint {
