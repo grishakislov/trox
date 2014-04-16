@@ -12,6 +12,7 @@ public class PlainViewModel {
     public var appView:ApplicationView;
     public var intro:IntroView;
     public var end:EndView;
+    public var tip:Tip;
     public var vein:Vein;
     public var particles:ErythrocyteLayer;
     public var valves:ValveLayer;

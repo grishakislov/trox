@@ -18,15 +18,20 @@ public class ApplicationView extends Sprite {
     private var intro:IntroView;
     private var end:EndView;
     private var main:MovieClip;
+    private var tip:Tip;
     private var bg:MovieClip;
     private var vein:Vein;
     private var blister:Blister;
     private var tube:Tube;
     private var loader:Loader;
 
+    [Embed(source="../../../../../assets/Trox8.swf", mimeType="application/octet-stream")]
+    public static const TROX:Class;
+
+
     public function initialize():void {
         loader = new Loader();
-        var veinMC:ByteArray = new Resources.TROX();
+        var veinMC:ByteArray = new TROX();
         loader.contentLoaderInfo.addEventListener(Event.INIT, loadCompleteListener);
         loader.loadBytes(veinMC);
         mask = new Bitmap(new BitmapData(800, 600));
@@ -37,6 +42,7 @@ public class ApplicationView extends Sprite {
         result.appView = this;
         result.intro = intro;
         result.vein = vein;
+        result.tip = tip;
         result.cure = vein.getCure();
         result.particles = vein.getParticles();
         result.valves = vein.getValveLayer();
@@ -73,6 +79,10 @@ public class ApplicationView extends Sprite {
 
     public function attachGame():void {
         attachBG();
+
+        tip.getVisual().x += 10;
+        tip.getVisual().y += 10;
+        addChild(tip.getVisual());
 
         vein.getVein().x = 657;
         vein.getVein().y = 631;
@@ -115,6 +125,7 @@ public class ApplicationView extends Sprite {
         intro = new IntroView(main.getChildByName("intro"));
         end = new EndView(main.getChildByName("end"));
         bg = MovieClip(main.getChildByName("bg"));
+        tip = new Tip(main.getChildByName("tip"));
         vein = new Vein(main.getChildByName("vein_all"));
         blister = new Blister(main.getChildByName("blister"));
         tube = new Tube(main.getChildByName("tube"));

@@ -16,18 +16,19 @@ public class PhaseTwoController {
         this.view = view;
         view.tumor.lock();
         view.tube.setEnabled(false);
-
         var timer:Timer = new Timer(GameSettings.BLISTER_ENABLE_DELAY_MILLIS, 1);
         timer.addEventListener(TimerEvent.TIMER, onBlisterTimerComplete);
         timer.start();
     }
 
     private function onBlisterTimerComplete(event:TimerEvent):void {
+        view.tip.showBlisterTip();
         view.blister.setEnabled(true);
         view.blister.addActionCallback(onPillsUsed);
     }
 
     private function onPillsUsed():void {
+        view.tip.hideBlisterTip();
         /*
         My cat wrote it here:
         n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n

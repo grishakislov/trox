@@ -49,6 +49,14 @@ public class PhaseOneController {
     private function expandNext():void {
         currentVeinStep ++;
 
+        if (currentVeinStep == 1) {
+            view.tip.showGelTip();
+        }
+
+        if (currentVeinStep == 2) {
+            view.tip.hideGelTip();
+        }
+
         if (currentVeinStep <= GameSettings.VEIN_STEPS) {
             view.vein.expand();
             view.particles.setStep(currentVeinStep);
