@@ -1,13 +1,10 @@
 package ru.norobots.trox.view {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
-import flash.display.Loader;
 import flash.display.MovieClip;
 import flash.display.Sprite;
-import flash.events.Event;
-import flash.utils.ByteArray;
+import flash.events.MouseEvent;
 
-import ru.norobots.trox.Resources;
 import ru.norobots.trox.view.controls.Blister;
 import ru.norobots.trox.view.controls.Tube;
 import ru.norobots.trox.view.end.EndView;
@@ -23,18 +20,24 @@ public class ApplicationView extends Sprite {
     private var vein:Vein;
     private var blister:Blister;
     private var tube:Tube;
-    private var loader:Loader;
 
-    [Embed(source="../../../../../assets/Trox8.swf", mimeType="application/octet-stream")]
-    public static const TROX:Class;
+    public function initialize(mainSwf:MovieClip):void {
+        mouseChildren = false;
+        main = MovieClip(mainSwf.getChildByName("main"));
+        intro = new IntroView(main.getChildByName("intro"));
+        end = new EndView(main.getChildByName("end"));
+        bg = MovieClip(main.getChildByName("bg"));
+        tip = new Tip(main.getChildByName("tip"));
+        vein = new Vein(main.getChildByName("vein_all"));
+        blister = new Blister(main.getChildByName("blister"));
+        tube = new Tube(main.getChildByName("tube"));
 
+        x = -267;
+        y = -356;
 
-    public function initialize():void {
-        loader = new Loader();
-        var veinMC:ByteArray = new TROX();
-        loader.contentLoaderInfo.addEventListener(Event.INIT, loadCompleteListener);
-        loader.loadBytes(veinMC);
+        trace("Assets initialized successfully")
         mask = new Bitmap(new BitmapData(800, 600));
+
     }
 
     public function getViewModel():PlainViewModel {
@@ -117,24 +120,21 @@ public class ApplicationView extends Sprite {
         vein.getTumorLayer().setEnabled(true);
         tube.setEnabled(true);
         blister.setEnabled(true);
+//        addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+//        addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+//        addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
     }
 
-    private function loadCompleteListener(e:Event):void {
-        var mc:MovieClip = MovieClip(loader.content);
-        main = MovieClip(mc.getChildByName("main"));
-        intro = new IntroView(main.getChildByName("intro"));
-        end = new EndView(main.getChildByName("end"));
-        bg = MovieClip(main.getChildByName("bg"));
-        tip = new Tip(main.getChildByName("tip"));
-        vein = new Vein(main.getChildByName("vein_all"));
-        blister = new Blister(main.getChildByName("blister"));
-        tube = new Tube(main.getChildByName("tube"));
+    private function onMouseUp(event:MouseEvent):void {
 
-        x = -267;
-        y = -356;
+    }
 
-        trace("Assets initialized successfully")
-        dispatchEvent(new Event(Event.INIT));
+    private function onMouseMove(event:MouseEvent):void {
+        trace("BG_MOVE");
+    }
+
+    private function onMouseDown(event:MouseEvent):void {
+        trace("BG");
     }
 
     public function getIntro():IntroView {

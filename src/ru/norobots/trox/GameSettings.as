@@ -1,8 +1,10 @@
 package ru.norobots.trox {
 public class GameSettings {
 
+    public static const LOCAL:Boolean = false;
+
     public static const VEIN_STEPS:uint = 6;
-    public static const VEIN_STEP_SECONDS:uint = 8;
+    public static const VEIN_STEP_SECONDS:uint = 3;
 
     public static const BLISTER_ENABLE_DELAY_MILLIS:uint = 3000;
     public static const MAX_VALVE_ILL_DELAY_MILLIS:uint = 1000;

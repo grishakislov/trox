@@ -21,6 +21,9 @@ public class TroxButton extends InteractiveView{
     }
 
     override protected function onMouseMove(event:MouseEvent):void {
+        if (!enabled) {
+            return;
+        }
         super.onMouseMove(event);
         mouseInside() ? setOver() : setOut();
     }
@@ -34,6 +37,9 @@ public class TroxButton extends InteractiveView{
     }
 
     override protected function onMouseUp(event:MouseEvent):void {
+        if (!enabled) {
+            return;
+        }
         super.onMouseUp(event);
         if (used) {
             return;

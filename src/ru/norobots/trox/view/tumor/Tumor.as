@@ -1,6 +1,7 @@
 package ru.norobots.trox.view.tumor {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
+import flash.events.MouseEvent;
 
 import ru.norobots.trox.Ticker;
 import ru.norobots.trox.UIState;
@@ -25,7 +26,9 @@ public class Tumor extends InteractiveView {
         arrow1 = new TutorialArrow(tumorMC.getChildByName("arrow1"));
         arrow2 = new TutorialArrow(tumorMC.getChildByName("arrow2"));
         setVisible(false);
+        tumorMC.mouseEnabled = false;
     }
+
 
     override public function setVisible(value:Boolean):void {
         tumor.visible = value;
@@ -56,7 +59,6 @@ public class Tumor extends InteractiveView {
     }
 
     private function onTick(dt:uint):void {
-
         framesPassed++;
         tumorMore();
 

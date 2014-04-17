@@ -1,6 +1,7 @@
 package ru.norobots.trox.view.controls {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
+import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.geom.Point;
 import flash.ui.Mouse;
@@ -12,14 +13,14 @@ import ru.norobots.trox.view.Glow;
 public class Tube extends InteractiveView {
 
     var point:Point = new Point(0,0);
-    private var gelCursor:DisplayObject;
+    private var gelCursor:Sprite;
     private var mainVisual:MovieClip;
     private var glow:Glow;
 
     public function Tube(visual:DisplayObject) {
         mainVisual = MovieClip (visual);
         super(mainVisual.getChildByName("tube_view"));
-        gelCursor = mainVisual.getChildByName("gel");
+        gelCursor = Sprite(mainVisual.getChildByName("gel"));
         gelCursor.visible = false;
         glow = new Glow(mainVisual.getChildByName("glow"));
     }
@@ -33,8 +34,8 @@ public class Tube extends InteractiveView {
     }
 
     public function setCursorVisible(value:Boolean):void {
-        gelCursor.visible = value;
         UIState.tubeSelected = value;
+        gelCursor.visible = value;
         if (value) {
             Mouse.hide();
             Ticker.addTickListener(onTick);
@@ -50,7 +51,6 @@ public class Tube extends InteractiveView {
 
     override public function setEnabled(value:Boolean):void {
         super.setEnabled(value);
-        trace("TUBE: " + value);
         if (value) {
             glow.show();
         } else {

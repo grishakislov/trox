@@ -10,7 +10,7 @@ import ru.norobots.trox.view.Glow;
 
 public class Blister extends InteractiveView {
 
-    private var enabled:Boolean;
+    private var blisterEnabled:Boolean;
     private var callback:Function;
     private var animatedBlister:BaseView;
     private var lock:DisplayObject;
@@ -25,7 +25,7 @@ public class Blister extends InteractiveView {
 
     override public function setEnabled(value:Boolean):void {
         super.setEnabled(value);
-        enabled = value;
+        blisterEnabled = value;
         if (value) {
             glow.show();
         } else {
@@ -46,7 +46,7 @@ public class Blister extends InteractiveView {
     public function reset():void {
         animatedBlister.stop();
         animatedBlister.getVisual().gotoAndStop(1);
-        enabled = false;
+        blisterEnabled = false;
         lock.visible = true;
     }
 
@@ -61,10 +61,13 @@ public class Blister extends InteractiveView {
     }
 
     override protected function onMouseUp(event:MouseEvent):void {
+        if (!enabled) {
+            return;
+        }
         super.onMouseUp(event);
-        if (enabled && mouseInside()) {
+        if (blisterEnabled && mouseInside()) {
             glow.hide();
-            enabled = false;
+            blisterEnabled = false;
             var once:OnceAnimation = new OnceAnimation();
             once.addCompleteCallback(onBlisterAnimationCompleted);
             animatedBlister.play(once);
