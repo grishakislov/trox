@@ -1,15 +1,16 @@
 package ru.norobots.trox.view {
 import flash.display.DisplayObject;
 
-import ru.norobots.trox.animation.GlowAnimation;
+import ru.norobots.trox.animation.ShiningAnimation;
 
-public class Glow extends BaseView {
+public class Shining extends BaseView {
 
-    private var anim:GlowAnimation;
+    private var anim:ShiningAnimation;
 
-    public function Glow(visual:DisplayObject) {
+    public function Shining(visual:DisplayObject) {
         super(visual);
-        anim = new GlowAnimation();
+        getVisual().gotoAndPlay(1);
+        anim = new ShiningAnimation();
         play(anim);
     }
 

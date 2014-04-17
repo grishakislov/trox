@@ -12,8 +12,8 @@ import flash.system.SecurityDomain;
 
 public class AssetLoader extends EventDispatcher {
 
-    private static const PRELOADER_URL:String = "http://www.infernet.ru/flash/trox/preloader.swf";
-    private static const MAIN_SWF_URL:String = "http://www.infernet.ru/flash/trox/main.swf";
+    private static const PRELOADER_URL:String = "http://www.infernet.ru/flash/trox/preloader.swf?v=3";
+    private static const MAIN_SWF_URL:String = "http://www.infernet.ru/flash/trox/main.swf?v=4";
 
     private var preloader:MovieClip;
     private var mainView:MovieClip;

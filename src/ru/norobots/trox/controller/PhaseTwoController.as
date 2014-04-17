@@ -28,7 +28,6 @@ public class PhaseTwoController {
     }
 
     private function onPillsUsed():void {
-        view.tip.hideBlisterTip();
         /*
         My cat wrote it here:
         n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n

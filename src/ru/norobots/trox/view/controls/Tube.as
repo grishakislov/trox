@@ -2,35 +2,34 @@ package ru.norobots.trox.view.controls {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
 import flash.display.Sprite;
-import flash.events.MouseEvent;
 import flash.geom.Point;
 import flash.ui.Mouse;
 
 import ru.norobots.trox.Ticker;
 import ru.norobots.trox.UIState;
-import ru.norobots.trox.view.Glow;
+import ru.norobots.trox.view.Shining;
 
 public class Tube extends InteractiveView {
 
-    var point:Point = new Point(0,0);
+    var point:Point = new Point(0, 0);
     private var gelCursor:Sprite;
     private var mainVisual:MovieClip;
-    private var glow:Glow;
+    private var shining:Shining;
 
     public function Tube(visual:DisplayObject) {
-        mainVisual = MovieClip (visual);
+        mainVisual = MovieClip(visual);
         super(mainVisual.getChildByName("tube_view"));
         gelCursor = Sprite(mainVisual.getChildByName("gel"));
         gelCursor.visible = false;
-        glow = new Glow(mainVisual.getChildByName("glow"));
+        shining = new Shining(mainVisual.getChildByName("shining"));
     }
 
     public function getAll():MovieClip {
         return mainVisual;
     }
 
-    public function setGlowShowed(value:Boolean):void {
-        glow.setVisible(value);
+    public function setShiningShowed(value:Boolean):void {
+        shining.setVisible(value);
     }
 
     public function setCursorVisible(value:Boolean):void {
@@ -52,9 +51,9 @@ public class Tube extends InteractiveView {
     override public function setEnabled(value:Boolean):void {
         super.setEnabled(value);
         if (value) {
-            glow.show();
+            shining.show();
         } else {
-            glow.hide();
+            shining.hide();
         }
         if (!UIState.tubeSelected) {
             return;

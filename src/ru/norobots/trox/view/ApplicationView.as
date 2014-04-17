@@ -101,8 +101,8 @@ public class ApplicationView extends Sprite {
         vein.getParticles().getLayer().rotation = -21.6;
 
         vein.getCure().getVisual().x = 220;
-        vein.getCure().getVisual().y = 855;
-        vein.getCure().getVisual().rotation = -3;
+        vein.getCure().getVisual().y = 859;
+        vein.getCure().getVisual().rotation = -2;
 
         vein.getTumorLayer().getLayer().x = 665;
         vein.getTumorLayer().getLayer().y = 630;
@@ -120,21 +120,6 @@ public class ApplicationView extends Sprite {
         vein.getTumorLayer().setEnabled(true);
         tube.setEnabled(true);
         blister.setEnabled(true);
-//        addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-//        addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-//        addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-    }
-
-    private function onMouseUp(event:MouseEvent):void {
-
-    }
-
-    private function onMouseMove(event:MouseEvent):void {
-        trace("BG_MOVE");
-    }
-
-    private function onMouseDown(event:MouseEvent):void {
-        trace("BG");
     }
 
     public function getIntro():IntroView {

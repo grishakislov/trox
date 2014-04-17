@@ -6,7 +6,7 @@ import flash.geom.ColorTransform;
 import ru.norobots.trox.animation.OnceAnimation;
 
 import ru.norobots.trox.view.BaseView;
-import ru.norobots.trox.view.Glow;
+import ru.norobots.trox.view.Shining;
 
 public class Blister extends InteractiveView {
 
@@ -14,22 +14,22 @@ public class Blister extends InteractiveView {
     private var callback:Function;
     private var animatedBlister:BaseView;
     private var lock:DisplayObject;
-    private var glow:Glow;
+    private var shining:Shining;
 
     public function Blister(visual:DisplayObject) {
         super(visual);
         animatedBlister = new BaseView(getVisual().getChildByName("blister_anim"));
         lock = getVisual().getChildByName("lock");
-        glow = new Glow(getVisual().getChildByName("glow"));
+        shining = new Shining(getVisual().getChildByName("shining"));
     }
 
     override public function setEnabled(value:Boolean):void {
         super.setEnabled(value);
         blisterEnabled = value;
         if (value) {
-            glow.show();
+            shining.show();
         } else {
-            glow.hide();
+            shining.hide();
         }
         lock.visible = !value;
         if (value) {
@@ -39,8 +39,8 @@ public class Blister extends InteractiveView {
         }
     }
 
-    public function setGlowShowed(value:Boolean):void {
-        glow.setVisible(value);
+    public function setShiningShowed(value:Boolean):void {
+        shining.setVisible(value);
     }
 
     public function reset():void {
@@ -66,7 +66,7 @@ public class Blister extends InteractiveView {
         }
         super.onMouseUp(event);
         if (blisterEnabled && mouseInside()) {
-            glow.hide();
+            shining.hide();
             blisterEnabled = false;
             var once:OnceAnimation = new OnceAnimation();
             once.addCompleteCallback(onBlisterAnimationCompleted);

@@ -1,7 +1,7 @@
 package ru.norobots.trox.animation {
 import flash.display.MovieClip;
 
-public class GlowAnimation extends BaseAnimation {
+public class ShiningAnimation extends BaseAnimation {
 
     private var showFlag:Boolean = false;
 

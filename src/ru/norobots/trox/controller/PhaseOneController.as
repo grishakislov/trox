@@ -15,9 +15,9 @@ public class PhaseOneController {
 
     public function PhaseOneController(view:PlainViewModel) {
         this.view = view;
-        view.blister.setGlowShowed(false);
+        view.blister.setShiningShowed(false);
         view.blister.setEnabled(false);
-        view.tube.setGlowShowed(true);
+        view.tube.setShiningShowed(true);
         view.tube.setEnabled(true);
         view.tube.setCursorVisible(true);
         millisTotal = GameSettings.VEIN_STEP_SECONDS * GameSettings.VEIN_STEPS * 1000;
@@ -51,10 +51,6 @@ public class PhaseOneController {
 
         if (currentVeinStep == 1) {
             view.tip.showGelTip();
-        }
-
-        if (currentVeinStep == 2) {
-            view.tip.hideGelTip();
         }
 
         if (currentVeinStep <= GameSettings.VEIN_STEPS) {
