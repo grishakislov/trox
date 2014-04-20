@@ -40,6 +40,7 @@ public class Main extends Sprite {
     private function onPreloaderLoaded(event:AssetLoaderEvent):void {
         assetLoader.removeEventListener(AssetLoaderEvent.PRELOADER_LOADED, onPreloaderLoaded);
         preloader = new PreloaderView(assetLoader.getPreloader());
+        preloader.setProgress(0);
         addChild(preloader)
         assetLoader.addEventListener(AssetLoaderEvent.ASSET_PROGRESS, onProgress);
         assetLoader.addEventListener(AssetLoaderEvent.MAIN_ASSET_LOADED, onMainAssetLoaded);

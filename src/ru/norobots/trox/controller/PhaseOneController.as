@@ -1,4 +1,5 @@
 package ru.norobots.trox.controller {
+import ru.norobots.trox.Callback;
 import ru.norobots.trox.GameSettings;
 import ru.norobots.trox.Ticker;
 import ru.norobots.trox.view.PlainViewModel;
@@ -20,8 +21,13 @@ public class PhaseOneController {
         view.tube.setShiningShowed(true);
         view.tube.setEnabled(true);
         view.tube.setCursorVisible(true);
+        view.tumor.addFirstCureCallback(onFirstCure);
         millisTotal = GameSettings.VEIN_STEP_SECONDS * GameSettings.VEIN_STEPS * 1000;
         Ticker.addTickListener(onTick);
+    }
+
+    private function onFirstCure():void {
+        view.tip.resumeGelHiding();
     }
 
     private function onTick(dt:uint):void {
@@ -65,10 +71,9 @@ public class PhaseOneController {
     }
 
     private function onComplete():void {
+        view.tip.resumeGelHiding();
         Ticker.removeTickListener(onTick);
-        if (completeCallback != null) {
-            completeCallback();
-        }
+        Callback.fire(completeCallback);
     }
 
     private function phaseCompleted():Boolean {

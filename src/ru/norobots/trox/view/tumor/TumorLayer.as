@@ -3,12 +3,15 @@ import flash.display.DisplayObject;
 import flash.display.MovieClip;
 
 import ru.norobots.trox.Assert;
+import ru.norobots.trox.Callback;
 
 public class TumorLayer {
 
     private var layer:MovieClip;
     private var tumors:Vector.<Tumor> = new Vector.<Tumor>();
     private var currentStep:uint = 0;
+    private var firstCureCallback:Function;
+
 
     public function TumorLayer(layer:DisplayObject) {
         this.layer = MovieClip(layer);
@@ -85,22 +88,27 @@ public class TumorLayer {
         return layer;
     }
 
-    public function lock():void {
+    public function addFirstCureCallback(callback:Function):void {
         for (var i:int = 0; i < tumors.length; i++) {
-            tumors[i].lock();
+            firstCureCallback = callback;
+            tumors[i].addFirstCureCallback(onFirstCure);
         }
+    }
+
+    private function onFirstCure():void {
+        for (var i:int = 0; i < tumors.length; i++) {
+            tumors[i].removeFirstCureCallback();
+
+        }
+        Callback.fire(firstCureCallback);
     }
 
     public function reset():void {
-        unlock();
+        for (var i:int = 0; i < tumors.length; i++) {
+            tumors[i].reset();
+        }
         updateSteps();
         currentStep = 1;
-    }
-
-    public function unlock():void {
-        for (var i:int = 0; i < tumors.length; i++) {
-            tumors[i].unlock();
-        }
     }
 
     public function setHealthy():void {

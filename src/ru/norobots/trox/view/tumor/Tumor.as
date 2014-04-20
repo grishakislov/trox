@@ -1,10 +1,10 @@
 package ru.norobots.trox.view.tumor {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
-import flash.events.MouseEvent;
+
+import ru.norobots.trox.Callback;
 
 import ru.norobots.trox.Ticker;
-import ru.norobots.trox.UIState;
 import ru.norobots.trox.animation.RewindAnimation;
 import ru.norobots.trox.view.TutorialArrow;
 import ru.norobots.trox.view.controls.InteractiveState;
@@ -17,7 +17,7 @@ public class Tumor extends InteractiveView {
     private var arrow2:TutorialArrow;
     private var currentStep:uint;
     private var framesPassed:uint;
-    private var locked:Boolean;
+    private var cureCallback:Function;
 
     public function Tumor(tumor:DisplayObject) {
         var tumorMC:MovieClip = MovieClip(tumor);
@@ -49,12 +49,7 @@ public class Tumor extends InteractiveView {
         currentStep = value;
     }
 
-    public function lock():void {
-        locked = true;
-    }
-
-    public function unlock():void {
-        locked = false;
+    public function reset():void {
         arrow2.getVisual().gotoAndStop(1);
     }
 
@@ -62,16 +57,13 @@ public class Tumor extends InteractiveView {
         framesPassed++;
         tumorMore();
 
-        if (locked || !UIState.tubeSelected) {
-            return;
-        }
-
         if (state == InteractiveState.ACTIVE) {
             cure();
         }
     }
 
     private function cure():void {
+        Callback.fire(cureCallback);
         var bottomFrame:uint = getBottomFrame();
         if (tumor.currentFrame <= bottomFrame) {
             return;
@@ -89,6 +81,14 @@ public class Tumor extends InteractiveView {
                 framesPassed = 0;
             }
         }
+    }
+
+    public function addFirstCureCallback(callback:Function):void {
+        cureCallback = callback;
+    }
+
+    public function removeFirstCureCallback():void {
+        cureCallback = null;
     }
 
     public function setHealthy():void {

@@ -1,12 +1,16 @@
 package ru.norobots.trox.animation {
 import flash.display.MovieClip;
 
+import ru.norobots.trox.Callback;
+
 import ru.norobots.trox.Ticker;
 
 public class BaseAnimation {
 
     protected var millisElapsed:uint = 0;
     protected var completeCallback:Function;
+    private var frameHandler:Function;
+    private var handleFrame:int;
     protected var movies:Vector.<MovieClip> = new Vector.<MovieClip>();
 
     public function addCompleteCallback(callback:Function):void {
@@ -37,18 +41,28 @@ public class BaseAnimation {
     }
 
     public function onComplete():void {
-        if (completeCallback != null) {
-            completeCallback();
-        }
+        Callback.fire(completeCallback);
     }
 
     protected function onTick(dt:uint):void {
         millisElapsed += dt;
+        if (movies[0].currentFrame == handleFrame) {
+            Callback.fire(frameHandler);
+        }
     }
 
     protected function getCurrentFrame():uint {
         return 0;
     }
 
+    public final function addFrameHandler(frame:uint, callback:Function):void {
+        handleFrame = frame;
+        frameHandler = callback;
+    }
+
+    public final function removeFrameHandler():void {
+        handleFrame = -1;
+        frameHandler = null;
+    }
 }
 }

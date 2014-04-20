@@ -3,6 +3,8 @@ import flash.display.DisplayObject;
 import flash.events.MouseEvent;
 import flash.geom.ColorTransform;
 
+import ru.norobots.trox.Callback;
+
 import ru.norobots.trox.animation.OnceAnimation;
 
 import ru.norobots.trox.view.BaseView;
@@ -11,10 +13,15 @@ import ru.norobots.trox.view.Shining;
 public class Blister extends InteractiveView {
 
     private var blisterEnabled:Boolean;
-    private var callback:Function;
+    private var pressCallback:Function;
+    private var actionCallback:Function;
+    private var outCallback:Function;
+    private var overCallback:Function;
     private var animatedBlister:BaseView;
     private var lock:DisplayObject;
     private var shining:Shining;
+
+    private var over:Boolean;
 
     public function Blister(visual:DisplayObject) {
         super(visual);
@@ -51,13 +58,7 @@ public class Blister extends InteractiveView {
     }
 
     public function addActionCallback(value:Function):void {
-        callback = value;
-    }
-
-    private function fireCallback():void {
-        if (callback != null) {
-            callback();
-        }
+        actionCallback = value;
     }
 
     override protected function onMouseUp(event:MouseEvent):void {
@@ -66,6 +67,7 @@ public class Blister extends InteractiveView {
         }
         super.onMouseUp(event);
         if (blisterEnabled && mouseInside()) {
+            Callback.fire(pressCallback);
             shining.hide();
             blisterEnabled = false;
             var once:OnceAnimation = new OnceAnimation();
@@ -74,8 +76,44 @@ public class Blister extends InteractiveView {
         }
     }
 
+    override protected function onMouseMove(event:MouseEvent):void {
+        super.onMouseMove(event);
+        if (mouseInside()) {
+            if (!over) {
+                over = true;
+                Callback.fire(overCallback);
+            }
+        } else {
+            if (over) {
+                over = false;
+                Callback.fire(outCallback);
+            }
+        }
+    }
+
     private function onBlisterAnimationCompleted():void {
-        fireCallback();
+        Callback.fire(actionCallback);
+    }
+
+    public function addPressCallback(callback:Function):void {
+        pressCallback = callback;
+    }
+
+
+    public function addOutCallback(callback:Function):void {
+        outCallback = callback;
+    }
+
+    public function addOverCallback(callback:Function):void {
+        overCallback = callback;
+    }
+
+    public function removeOutCallback():void {
+        outCallback = null;
+    }
+
+    public function removeOverCallback():void {
+        overCallback = null;
     }
 }
 }

@@ -23,7 +23,11 @@ public class Shining extends BaseView {
     }
 
     override public function setVisible(value:Boolean):void {
-        getVisual().alpha = value ? 1.0 : 0.0;
+        if (value) {
+            anim.show();
+        } else {
+            anim.hide();
+        }
     }
 }
 }

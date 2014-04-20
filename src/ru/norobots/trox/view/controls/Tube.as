@@ -6,7 +6,6 @@ import flash.geom.Point;
 import flash.ui.Mouse;
 
 import ru.norobots.trox.Ticker;
-import ru.norobots.trox.UIState;
 import ru.norobots.trox.view.Shining;
 
 public class Tube extends InteractiveView {
@@ -33,7 +32,6 @@ public class Tube extends InteractiveView {
     }
 
     public function setCursorVisible(value:Boolean):void {
-        UIState.tubeSelected = value;
         gelCursor.visible = value;
         if (value) {
             Mouse.hide();
@@ -54,9 +52,6 @@ public class Tube extends InteractiveView {
             shining.show();
         } else {
             shining.hide();
-        }
-        if (!UIState.tubeSelected) {
-            return;
         }
         setCursorVisible(value);
         if (value) {

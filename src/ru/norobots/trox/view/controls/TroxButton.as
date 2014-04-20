@@ -5,6 +5,8 @@ import flash.events.TimerEvent;
 import flash.geom.ColorTransform;
 import flash.utils.Timer;
 
+import ru.norobots.trox.Callback;
+
 import ru.norobots.trox.GameSettings;
 
 import ru.norobots.trox.animation.OnceAnimation;
@@ -62,13 +64,7 @@ public class TroxButton extends InteractiveView{
     }
 
     private function onTimerComplete(event:TimerEvent):void {
-        fireCallback();
-    }
-
-    private function fireCallback():void {
-        if (completeCallback != null) {
-            completeCallback();
-        }
+        Callback.fire(completeCallback);
     }
 
     public function addCallback(value:Function):void {

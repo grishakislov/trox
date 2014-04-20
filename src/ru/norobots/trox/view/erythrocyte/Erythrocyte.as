@@ -46,13 +46,13 @@ public class Erythrocyte extends BaseView {
         getVisual().gotoAndStop(1);
     }
 
-    private function getAnimation():ErythrocyteAnimation {
-        return ErythrocyteAnimation(animation);
+    private function getErythrocyteAnimation():ErythrocyteAnimation {
+        return ErythrocyteAnimation(getAnimation());
     }
 
     public function setShowed(value:Boolean):void {
-        if (getAnimation() != null) {
-            getAnimation().setShowed(value);
+        if (getErythrocyteAnimation() != null) {
+            getErythrocyteAnimation().setShowed(value);
         }
     }
 
@@ -65,8 +65,8 @@ public class Erythrocyte extends BaseView {
 
     public function setStep(value:uint):void {
         step = value;
-        if (getAnimation() != null) {
-            getAnimation().setStep(value);
+        if (getErythrocyteAnimation() != null) {
+            getErythrocyteAnimation().setStep(value);
         }
     }
 

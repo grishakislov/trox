@@ -56,6 +56,7 @@ public class ValveLayer {
         for (var i:int = 0; i < valves.length; i++) {
             valves[i].setHealthy();
         }
+        illValvesNum = 0;
     }
 }
 }

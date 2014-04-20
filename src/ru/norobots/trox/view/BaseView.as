@@ -9,7 +9,7 @@ import ru.norobots.trox.animation.TranslationAnimation;
 public class BaseView {
 
     protected var visual:MovieClip;
-    protected var animation:BaseAnimation;
+    private var animation:BaseAnimation;
 
     public function BaseView(visual:DisplayObject) {
         Assert.notNull(visual);
@@ -40,6 +40,10 @@ public class BaseView {
 
     public function getVisual():MovieClip {
         return visual;
+    }
+
+    public function getAnimation():BaseAnimation {
+        return animation;
     }
 }
 }
