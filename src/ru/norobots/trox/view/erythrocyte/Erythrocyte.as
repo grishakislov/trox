@@ -1,14 +1,10 @@
 package ru.norobots.trox.view.erythrocyte {
 import flash.display.DisplayObject;
 import flash.events.TimerEvent;
-import flash.sampler.getSavedThis;
 import flash.utils.Timer;
-
-import ru.norobots.trox.GameSettings;
 
 import ru.norobots.trox.animation.BaseAnimation;
 import ru.norobots.trox.animation.ErythrocyteAnimation;
-import ru.norobots.trox.animation.LoopAnimation;
 import ru.norobots.trox.view.BaseView;
 
 public class Erythrocyte extends BaseView {

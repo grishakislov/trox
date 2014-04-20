@@ -3,10 +3,8 @@ import flash.events.TimerEvent;
 import flash.utils.Timer;
 
 import ru.norobots.trox.Callback;
-
 import ru.norobots.trox.GameSettings;
 import ru.norobots.trox.animation.OnceAnimation;
-
 import ru.norobots.trox.view.PlainViewModel;
 
 public class PhaseTwoController {

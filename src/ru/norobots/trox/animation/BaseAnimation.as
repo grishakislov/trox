@@ -2,7 +2,6 @@ package ru.norobots.trox.animation {
 import flash.display.MovieClip;
 
 import ru.norobots.trox.Callback;
-
 import ru.norobots.trox.Ticker;
 
 public class BaseAnimation {

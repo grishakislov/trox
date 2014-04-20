@@ -4,7 +4,6 @@ import flash.events.TimerEvent;
 import flash.utils.Timer;
 
 import ru.norobots.trox.GameSettings;
-
 import ru.norobots.trox.animation.ValveAnimation;
 import ru.norobots.trox.view.BaseView;
 

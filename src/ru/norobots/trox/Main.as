@@ -1,10 +1,8 @@
 package ru.norobots.trox {
 
-import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.display.StageQuality;
 import flash.events.Event;
-import flash.events.MouseEvent;
 
 import ru.norobots.trox.controller.AbstractController;
 import ru.norobots.trox.controller.ControllerMode;

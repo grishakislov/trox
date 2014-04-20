@@ -3,7 +3,6 @@ import flash.display.DisplayObject;
 import flash.display.MovieClip;
 
 import ru.norobots.trox.Callback;
-
 import ru.norobots.trox.Ticker;
 import ru.norobots.trox.animation.RewindAnimation;
 import ru.norobots.trox.view.TutorialArrow;

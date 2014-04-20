@@ -3,10 +3,9 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.MovieClip;
 import flash.display.Sprite;
-import flash.events.MouseEvent;
 
-import ru.norobots.trox.view.controls.Blister;
 import ru.norobots.trox.view.controls.Tube;
+import ru.norobots.trox.view.controls.blister.Blister;
 import ru.norobots.trox.view.end.EndView;
 import ru.norobots.trox.view.intro.IntroView;
 

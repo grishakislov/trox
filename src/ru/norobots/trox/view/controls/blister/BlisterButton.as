@@ -1,33 +1,25 @@
-package ru.norobots.trox.view.controls {
+package ru.norobots.trox.view.controls.blister {
 import flash.display.DisplayObject;
 import flash.events.MouseEvent;
 import flash.geom.ColorTransform;
 
 import ru.norobots.trox.Callback;
-
 import ru.norobots.trox.animation.OnceAnimation;
-
-import ru.norobots.trox.view.BaseView;
 import ru.norobots.trox.view.Shining;
+import ru.norobots.trox.view.controls.InteractiveView;
 
-public class Blister extends InteractiveView {
+public class BlisterButton extends InteractiveView {
 
+    private var shining:Shining;
     private var blisterEnabled:Boolean;
     private var pressCallback:Function;
     private var actionCallback:Function;
     private var outCallback:Function;
     private var overCallback:Function;
-    private var animatedBlister:BaseView;
-    private var lock:DisplayObject;
-    private var shining:Shining;
-
     private var over:Boolean;
 
-    public function Blister(visual:DisplayObject) {
+    public function BlisterButton(visual:DisplayObject) {
         super(visual);
-        animatedBlister = new BaseView(getVisual().getChildByName("blister_anim"));
-        lock = getVisual().getChildByName("lock");
-        shining = new Shining(getVisual().getChildByName("shining"));
     }
 
     override public function setEnabled(value:Boolean):void {
@@ -38,7 +30,7 @@ public class Blister extends InteractiveView {
         } else {
             shining.hide();
         }
-        lock.visible = !value;
+
         if (value) {
             getVisual().transform.colorTransform = new ColorTransform(1, 1, 1);
         } else {
@@ -46,19 +38,16 @@ public class Blister extends InteractiveView {
         }
     }
 
-    public function setShiningShowed(value:Boolean):void {
-        shining.setVisible(value);
+    public function addShining(value:Shining):void {
+        shining = value;
+    }
+
+    public function getShining():Shining {
+        return shining;
     }
 
     public function reset():void {
-        animatedBlister.stop();
-        animatedBlister.getVisual().gotoAndStop(1);
         blisterEnabled = false;
-        lock.visible = true;
-    }
-
-    public function addActionCallback(value:Function):void {
-        actionCallback = value;
     }
 
     override protected function onMouseUp(event:MouseEvent):void {
@@ -72,7 +61,7 @@ public class Blister extends InteractiveView {
             blisterEnabled = false;
             var once:OnceAnimation = new OnceAnimation();
             once.addCompleteCallback(onBlisterAnimationCompleted);
-            animatedBlister.play(once);
+            play(once);
         }
     }
 
@@ -95,6 +84,10 @@ public class Blister extends InteractiveView {
         Callback.fire(actionCallback);
     }
 
+    public function addActionCallback(value:Function):void {
+        actionCallback = value;
+    }
+
     public function addPressCallback(callback:Function):void {
         pressCallback = callback;
     }
@@ -115,5 +108,8 @@ public class Blister extends InteractiveView {
     public function removeOverCallback():void {
         overCallback = null;
     }
+
+
+
 }
 }

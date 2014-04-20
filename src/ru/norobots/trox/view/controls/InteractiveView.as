@@ -6,7 +6,6 @@ import flash.events.MouseEvent;
 import flash.geom.Rectangle;
 
 import ru.norobots.trox.Main;
-
 import ru.norobots.trox.view.BaseView;
 
 public class InteractiveView extends BaseView {
